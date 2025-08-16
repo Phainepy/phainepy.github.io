@@ -1,2 +1,2 @@
 # phainepy.github.io
-Photoshoot
+Photoshoot prep work.
