@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lil Traumatized Photography Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Lil Traumatized Photography Portfolio</h1>
+    <nav>
+      <a href="#category1">Category 1</a>
+      <a href="#category2">Category 2</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="category1" class="category">
+      <h2>Category 1</h2>
+      <div class="gallery" data-category="Category 1">
+        <img src="images/category1-photo1.jpg" alt="Category 1 Photo 1" loading="lazy" />
+        <img src="images/category1-photo2.jpg" alt="Category 1 Photo 2" loading="lazy" />
+        <img src="images/category1-photo3.jpg" alt="Category 1 Photo 3" loading="lazy" />
+        <img src="images/category1-photo4.jpg" alt="Category 1 Photo 4" loading="lazy" />
+        <img src="images/category1-photo5.jpg" alt="Category 1 Photo 5" loading="lazy" />
+      </div>
+    </section>
+
+    <section id="category2" class="category">
+      <h2>Category 2</h2>
+      <div class="gallery" data-category="Category 2">
+        <img src="images/category2-photo1.jpg" alt="Category 2 Photo 1" loading="lazy" />
+        <img src="images/category2-photo2.jpg" alt="Category 2 Photo 2" loading="lazy" />
+        <img src="images/category2-photo3.jpg" alt="Category 2 Photo 3" loading="lazy" />
+        <img src="images/category2-photo4.jpg" alt="Category 2 Photo 4" loading="lazy" />
+        <img src="images/category2-photo5.jpg" alt="Category 2 Photo 5" loading="lazy" />
+      </div>
+    </section>
+  </main>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
+    <button class="lb-btn lb-close" aria-label="Close (Esc)">&times;</button>
+    <button class="lb-btn lb-prev" aria-label="Previous (←)">&#10094;</button>
+    <img id="lightbox-image" alt="" />
+    <div id="lightbox-caption" class="lb-caption" aria-live="polite"></div>
+    <button class="lb-btn lb-next" aria-label="Next (→)">&#10095;</button>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Lil Traumatized Photography</p>
+  </footer>
+</body>
+</html>
