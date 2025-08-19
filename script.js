@@ -14,20 +14,26 @@
   function openAt(index) {
     if (index < 0 || index >= images.length) return;
     currentIndex = index;
-    const src = images[index].getAttribute('data-full') || images[index].src;
-    const alt = images[index].getAttribute('alt') || '';
+
+    const clicked = images[index];
+    const src = clicked.getAttribute('data-full') || clicked.src;
+    const alt = clicked.getAttribute('alt') || '';
+
     imgEl.src = src;
     imgEl.alt = alt;
     captionEl.textContent = alt;
+
     lightbox.classList.add('open');
     lightbox.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden'; // prevent background scroll
   }
 
   function close() {
     lightbox.classList.remove('open');
     lightbox.setAttribute('aria-hidden', 'true');
     imgEl.src = '';
+    imgEl.alt = '';
+    captionEl.textContent = '';
     document.body.style.overflow = '';
   }
 
@@ -41,10 +47,10 @@
 
   // Controls
   btnClose.addEventListener('click', close);
-  btnNext.addEventListener('click', next);
-  btnPrev.addEventListener('click', prev);
+  btnNext.addEventListener('click', (e) => { e.stopPropagation(); next(); });
+  btnPrev.addEventListener('click', (e) => { e.stopPropagation(); prev(); });
 
-  // Close when clicking backdrop (but not the image)
+  // Close when clicking backdrop (but not the image or buttons)
   lightbox.addEventListener('click', (e) => {
     if (e.target === lightbox) close();
   });
