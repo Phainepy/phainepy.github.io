@@ -1,2 +1,1 @@
-
-Photoshoot prep work.
+Prepping for a photoshoot. This is a static webpage with some simple CSS styling and Javascript functionality for a simple and lightweight design. 

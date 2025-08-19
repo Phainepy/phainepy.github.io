@@ -93,6 +93,11 @@ nav a:hover { color: var(--fg); }
 .lb-prev { left: 24px; }
 .lb-next { right: 24px; }
 
+
+.email {
+  text-align: center;
+}
+
 /* Footer */
 footer {
   text-align: center;
