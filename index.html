@@ -75,6 +75,14 @@
     <button class="lb-btn lb-next" aria-label="Next (→)">&#10095;</button>
   </div>
 
+<script>
+  document.addEventListener("contextmenu", function(e) {
+    if (e.target.tagName === "IMG") {
+      e.preventDefault();
+    }
+  });
+</script>
+
   <footer>
     <p>&copy; 2025 Lil Traumatized Photography</p>
   </footer>

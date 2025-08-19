@@ -132,6 +132,12 @@ nav a:hover { color: var(--fg); }
 
 .email { text-align: center; }
 
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: auto; /* keeps lightbox clickable */
+}
+
 /* Footer */
 footer {
   text-align: center;
