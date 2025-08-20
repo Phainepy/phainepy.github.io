@@ -65,3 +65,42 @@
     }
   });
 })();
+
+document.addEventListener("DOMContentLoaded", () => {
+  const trigger = document.querySelector(".contact-trigger");
+  const form = document.querySelector(".contact-form");
+  let expanded = false;
+
+  // Expand on hover
+  trigger.addEventListener("mouseenter", () => {
+    if (!expanded) {
+      form.style.display = "flex";
+      expanded = true;
+    }
+  });
+
+  const textarea = document.getElementById("body");
+
+// auto-resize textarea on input
+  textarea.addEventListener("input", () => {
+  textarea.style.height = "auto";  // reset
+  textarea.style.height = textarea.scrollHeight + "px"; // grow to fit
+  });
+
+  // Handle form submit
+  document.getElementById("contact-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const subject = document.getElementById("subject").value.trim();
+    const body = document.getElementById("body").value.trim();
+
+    if (subject && body) {
+      window.location.href =
+        `mailto:photoshoot@liltraumatized.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    } else {
+      alert("Please fill out both fields before sending.");
+    }
+  });
+});
+
+

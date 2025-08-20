@@ -138,6 +138,81 @@ img {
   pointer-events: auto; /* keeps lightbox clickable */
 }
 
+.contact-wrapper {
+  text-align: center;
+  margin: 24px auto;
+  max-width: 480px;
+}
+
+/* Default: just text */
+.contact-trigger {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: var(--radius);
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+/* Hide the form initially */
+.contact-form {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--card);
+  padding: 20px;
+  margin-top: 16px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  animation: expand 0.3s ease forwards;
+}
+
+.contact-form label {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  font-size: 0.95rem;
+  color: var(--fg);
+}
+
+.contact-form input,
+.contact-form textarea {
+  margin-top: 4px;
+  padding: 8px;
+  border-radius: var(--radius);
+  border: 1px solid #ccc;
+  font: inherit;
+}
+
+.contact-form button {
+  align-self: flex-end;
+  padding: 8px 16px;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--fg);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.contact-form button:hover {
+  background: #444;
+}
+
+@keyframes expand {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+textarea {
+  resize: none;          /* disable the drag-to-resize handle */
+  overflow-y: hidden;    /* hide scrollbar, will auto-grow instead */
+  white-space: pre-wrap; /* ensure wrapping */
+  word-wrap: break-word; /* break long words if needed */
+}
+
+
 /* Footer */
 footer {
   text-align: center;
