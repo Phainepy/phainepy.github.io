@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Photos I Want to Shoot More Of — Lil Traumatized</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="film-page">
+
+  <nav class="film-nav">
+    <a href="index.html" class="back-link">&larr; Back</a>
+    <span class="film-nav-title">Lil Traumatized</span>
+  </nav>
+
+  <!-- Intro section — scrolls away before strip pins -->
+  <section class="film-intro">
+    <h1 class="film-heading">Dirty Rat Boi</h1>
+    <p class="film-description">
+      The theme was habits of their daily life and we wanted to capture
+      photos of the various things they did regularly at home.
+      A large focus was on the kitchen being particularly dirty
+      and the feeling of perpetually cleaning it.
+    </p>
+    <div class="scroll-hint">
+      Scroll to view
+      <span class="scroll-hint-arrow">&darr;</span>
+    </div>
+  </section>
+
+  <!-- Horizontal film strip (pinned by ScrollTrigger) -->
+  <section class="film-container">
+    <div class="film-track">
+      <div class="film-strip-full">
+        <div class="film-frame" data-frame="6" data-caption="Sorting laundry in the closet">
+          <img src="Category%201%20-%20Examples/AIV00797.avif" alt="Sorting laundry in the closet" loading="lazy" />
+        </div>
+        <div class="film-frame" data-frame="7" data-caption="Writing on their calendar">
+          <img src="Category%201%20-%20Examples/AIV00930.avif" alt="Writing on their calendar" loading="lazy" />
+        </div>
+        <div class="film-frame" data-frame="8" data-caption="At the shrine for regular daily rituals">
+          <img src="Category%201%20-%20Examples/AIV00969.avif" alt="At the shrine for regular daily rituals" loading="lazy" />
+        </div>
+        <div class="film-frame" data-frame="9" data-caption="Clipping toenails">
+          <img src="Category%201%20-%20Examples/AIV01035.avif" alt="Clipping toenails" loading="lazy" />
+        </div>
+        <div class="film-frame" data-frame="10" data-caption="Something with floss, a regular habit">
+          <img src="Category%201%20-%20Examples/AIV01045.avif" alt="Something with floss, a regular habit" loading="lazy" />
+        </div>
+        <div class="film-frame" data-frame="11" data-caption="Writing in their journal">
+          <img src="Category%201%20-%20Examples/AIV01110.avif" alt="Writing in their journal" loading="lazy" />
+        </div>
+        <div class="film-frame" data-frame="12" data-caption="The kitchen is always dirty">
+          <img src="Category%201%20-%20Examples/AIV01392.avif" alt="The kitchen is always dirty" loading="lazy" />
+        </div>
+        <div class="film-frame" data-frame="13" data-caption="Moody and direct portrait">
+          <img src="Category%201%20-%20Examples/AIV01563.avif" alt="Moody and direct portrait" loading="lazy" />
+        </div>
+        <div class="film-frame" data-frame="14" data-caption="The way the leg flows into the body">
+          <img src="Category%201%20-%20Examples/AIV01601.avif" alt="The way the leg flows into the body" loading="lazy" />
+        </div>
+        <div class="film-frame" data-frame="15" data-caption="Digging through the trash">
+          <img src="Category%201%20-%20Examples/AIV01740.avif" alt="Digging through the trash" loading="lazy" />
+        </div>
+        <div class="film-frame" data-frame="16" data-caption="Portrait against the kitchen cabinets">
+          <img src="Category%201%20-%20Examples/AIV01776.avif" alt="Portrait against the kitchen cabinets" loading="lazy" />
+        </div>
+        <div class="film-frame" data-frame="17" data-caption="Mirror image">
+          <img src="Category%201%20-%20Examples/AIV01835.avif" alt="Mirror image" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Caption bar (updated by JS as you scroll) -->
+  <div class="film-caption-bar">
+    <span class="frame-counter">1 / 12</span>
+    <span class="frame-caption"></span>
+  </div>
+
+  <footer class="film-footer">
+    <a href="index.html">&larr; Back to portfolio</a>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/ScrollTrigger.min.js"></script>
+  <script src="film.js"></script>
+  <script>
+    document.addEventListener('contextmenu', function (e) {
+      if (e.target.tagName === 'IMG') e.preventDefault();
+    });
+  </script>
+</body>
+</html>
