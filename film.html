@@ -11,6 +11,36 @@
 </head>
 <body class="film-page">
 
+  <!-- Film grain overlay (fine texture) -->
+  <svg class="film-grain" xmlns="http://www.w3.org/2000/svg">
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch" seed="2" />
+      <feColorMatrix type="saturate" values="0" />
+    </filter>
+    <rect width="100%" height="100%" filter="url(#grain)" />
+  </svg>
+
+  <!-- Film dust overlay (bright specks/dust particles) -->
+  <svg class="film-dust" xmlns="http://www.w3.org/2000/svg">
+    <filter id="dust" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="3" numOctaves="1" stitchTiles="stitch" seed="8" />
+      <feColorMatrix type="saturate" values="0" />
+      <feComponentTransfer>
+        <feFuncR type="discrete" tableValues="0 0 0 0 0 0 0 0 1" />
+        <feFuncG type="discrete" tableValues="0 0 0 0 0 0 0 0 1" />
+        <feFuncB type="discrete" tableValues="0 0 0 0 0 0 0 0 1" />
+      </feComponentTransfer>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#dust)" />
+  </svg>
+
+  <!-- Random film burn pop-ups (Change 3c) -->
+  <div class="film-burns" aria-hidden="true">
+    <div class="film-burn film-burn--1"></div>
+    <div class="film-burn film-burn--2"></div>
+    <div class="film-burn film-burn--3"></div>
+  </div>
+
   <nav class="film-nav">
     <a href="index.html" class="back-link">&larr; Back</a>
     <span class="film-nav-title">Lil Traumatized</span>
@@ -33,6 +63,13 @@
 
   <!-- Horizontal film strip (pinned by ScrollTrigger) -->
   <section class="film-container">
+    <!-- Film viewer / FV-2010 LED backlight -->
+    <div class="film-viewer" aria-hidden="true">
+      <div class="viewer-housing">
+        <div class="viewer-panel"></div>
+      </div>
+    </div>
+
     <div class="film-track">
       <div class="film-strip-full">
         <div class="film-frame" data-frame="6" data-caption="Sorting laundry in the closet">
@@ -79,6 +116,17 @@
   <div class="film-caption-bar">
     <span class="frame-counter">1 / 12</span>
     <span class="frame-caption"></span>
+  </div>
+
+  <!-- Lightbox (Change 4) -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <button class="lightbox-prev" aria-label="Previous photo">&#8249;</button>
+    <button class="lightbox-next" aria-label="Next photo">&#8250;</button>
+    <div class="lightbox-content">
+      <img class="lightbox-img" src="" alt="" />
+      <p class="lightbox-caption"></p>
+    </div>
   </div>
 
   <footer class="film-footer">

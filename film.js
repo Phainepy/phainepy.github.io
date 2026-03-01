@@ -1,4 +1,4 @@
-/* Film page — horizontal scroll + negative-to-color transitions */
+/* Film page — horizontal scroll, light table, lightbox, film burns */
 (function () {
   gsap.registerPlugin(ScrollTrigger);
 
@@ -45,6 +45,55 @@
   });
 
 
+  /* --- Film viewer / FV-2010 backlight effect --- */
+  var viewerPanel = document.querySelector('.viewer-panel');
+
+  if (viewerPanel) {
+    /* Viewer backlight turns on as horizontal scroll begins */
+    ScrollTrigger.create({
+      trigger: '.film-container',
+      start: 'top top',
+      end: 'top -6%',
+      scrub: true,
+      onUpdate: function (self) {
+        var p = self.progress;
+        /* Panel glows from dark → warm white */
+        var bgAlpha = (p * 0.07).toFixed(4);
+        var shadowAlpha1 = (p * 0.1).toFixed(4);
+        var shadowAlpha2 = (p * 0.04).toFixed(4);
+        viewerPanel.style.background = 'rgba(240, 235, 225, ' + bgAlpha + ')';
+        viewerPanel.style.boxShadow =
+          '0 0 80px rgba(240, 235, 225, ' + shadowAlpha1 + '), ' +
+          '0 0 200px rgba(240, 235, 225, ' + shadowAlpha2 + ')';
+      },
+    });
+
+    /* Slight zoom on the film strip */
+    gsap.to(strip, {
+      scale: 1.04,
+      scrollTrigger: {
+        trigger: '.film-container',
+        start: 'top top',
+        end: 'top -8%',
+        scrub: true,
+      },
+    });
+
+    /* Film strip edges react to backlight — warm amber glow */
+    ScrollTrigger.create({
+      trigger: '.film-container',
+      start: 'top top',
+      end: 'top -10%',
+      onEnter: function () {
+        strip.classList.add('is-backlit');
+      },
+      onLeaveBack: function () {
+        strip.classList.remove('is-backlit');
+      },
+    });
+  }
+
+
   /* --- Per-frame: negative → color + update caption --- */
   frames.forEach(function (frame, i) {
     var img = frame.querySelector('img');
@@ -89,5 +138,111 @@
     onEnter: function () {
       gsap.to('.scroll-hint', { opacity: 0, duration: 0.4 });
     },
+  });
+
+
+  /* --- Change 3c: Occasional random film burns --- */
+  var burns = gsap.utils.toArray('.film-burn');
+
+  function triggerRandomBurn() {
+    var burn = burns[Math.floor(Math.random() * burns.length)];
+    var xShift = (Math.random() - 0.5) * 30;
+
+    gsap.timeline()
+      .to(burn, {
+        opacity: 1,
+        x: xShift + '%',
+        duration: 2.5,
+        ease: 'power1.in',
+      })
+      .to(burn, {
+        opacity: 0,
+        duration: 3,
+        ease: 'power1.out',
+      })
+      .then(function () {
+        /* Schedule next burn: random 6-15 second interval */
+        var delay = 6000 + Math.random() * 9000;
+        setTimeout(triggerRandomBurn, delay);
+      });
+  }
+
+  /* Start after a 4-second initial delay */
+  if (burns.length > 0) {
+    setTimeout(triggerRandomBurn, 4000);
+  }
+
+
+  /* --- Change 4: Lightbox --- */
+  var lightbox = document.getElementById('lightbox');
+  if (!lightbox) return;
+
+  var lightboxImg = lightbox.querySelector('.lightbox-img');
+  var lightboxCaption = lightbox.querySelector('.lightbox-caption');
+  var currentIndex = 0;
+
+  function openLightbox(index) {
+    currentIndex = index;
+    var frame = frames[index];
+    var img = frame.querySelector('img');
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightboxCaption.textContent = frame.getAttribute('data-caption') || '';
+    lightbox.classList.add('is-active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('is-active');
+    document.body.style.overflow = '';
+  }
+
+  function navigateLightbox(direction) {
+    currentIndex = (currentIndex + direction + total) % total;
+    var frame = frames[currentIndex];
+    var img = frame.querySelector('img');
+
+    /* Brief fade for smooth image swap */
+    gsap.to(lightboxImg, {
+      opacity: 0,
+      duration: 0.15,
+      onComplete: function () {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCaption.textContent = frame.getAttribute('data-caption') || '';
+        gsap.to(lightboxImg, { opacity: 1, duration: 0.25 });
+      },
+    });
+  }
+
+  /* Click handlers on film frames */
+  frames.forEach(function (frame, i) {
+    frame.addEventListener('click', function () {
+      openLightbox(i);
+    });
+  });
+
+  /* Close handlers */
+  lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function (e) {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  /* Navigation */
+  lightbox.querySelector('.lightbox-prev').addEventListener('click', function (e) {
+    e.stopPropagation();
+    navigateLightbox(-1);
+  });
+  lightbox.querySelector('.lightbox-next').addEventListener('click', function (e) {
+    e.stopPropagation();
+    navigateLightbox(1);
+  });
+
+  /* Keyboard support */
+  document.addEventListener('keydown', function (e) {
+    if (!lightbox.classList.contains('is-active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') navigateLightbox(-1);
+    if (e.key === 'ArrowRight') navigateLightbox(1);
   });
 })();

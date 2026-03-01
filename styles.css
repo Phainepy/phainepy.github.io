@@ -203,6 +203,11 @@ img {
   transition: filter 0.8s ease;
 }
 
+/* Per-frame hover target on landing page (Change 2b) */
+.bucket .film-frame {
+  pointer-events: auto;
+}
+
 
 /* --- CRT placeholder (bucket 3) --- */
 .bucket-placeholder-visual {
@@ -235,6 +240,32 @@ img {
   background: #3a3a44;
   border-radius: 0 0 6px 6px;
   margin-top: -2px;
+}
+
+
+/* --- Social media icons (Change 7) --- */
+.social-links {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.social-link {
+  color: var(--text-dark);
+  opacity: 0.5;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.social-link:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.social-link svg {
+  display: block;
 }
 
 
@@ -302,11 +333,72 @@ img {
    FILM PAGE
    =========================================== */
 
+/* Gray-black background */
 .film-page {
-  background: #0a0908;
+  background: #161614;
   color: var(--text-light);
   overflow-x: hidden;
 }
+
+/* --- Film grain overlay (fine texture) --- */
+.film-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0.14;
+  mix-blend-mode: overlay;
+}
+
+/* --- Film dust overlay (bright specks/particles) --- */
+.film-dust {
+  position: fixed;
+  inset: 0;
+  z-index: 51;
+  pointer-events: none;
+  opacity: 0.3;
+  mix-blend-mode: screen;
+}
+
+/* --- Random film burn pop-ups (Change 3c) --- */
+.film-burns {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 45;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.film-burn {
+  position: absolute;
+  width: 30vw;
+  height: 60vh;
+  border-radius: 50%;
+  opacity: 0;
+  filter: blur(80px);
+}
+
+.film-burn--1 {
+  background: radial-gradient(ellipse, rgba(255, 120, 30, 0.35) 0%, rgba(200, 60, 10, 0.15) 40%, transparent 70%);
+  top: -10%;
+  right: -5%;
+}
+
+.film-burn--2 {
+  background: radial-gradient(ellipse, rgba(255, 180, 50, 0.3) 0%, rgba(230, 100, 20, 0.12) 45%, transparent 70%);
+  bottom: -15%;
+  left: 10%;
+}
+
+.film-burn--3 {
+  background: radial-gradient(ellipse, rgba(255, 80, 40, 0.25) 0%, rgba(180, 50, 15, 0.1) 40%, transparent 70%);
+  top: 20%;
+  left: -10%;
+}
+
 
 /* --- Navigation bar --- */
 .film-nav {
@@ -319,7 +411,7 @@ img {
   align-items: center;
   justify-content: space-between;
   padding: 16px 28px;
-  background: rgba(10, 9, 8, 0.85);
+  background: rgba(20, 20, 18, 0.85);
   backdrop-filter: blur(8px);
 }
 
@@ -396,6 +488,52 @@ img {
   50% { transform: translateY(6px); }
 }
 
+/* --- Film viewer / FV-2010 (Change 6 redesign) --- */
+.film-viewer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.viewer-housing {
+  width: 92vw;
+  max-width: 1400px;
+  height: 66vh;
+  max-height: 560px;
+  background: #0a0a0a;
+  border: 2px solid #1e1e1e;
+  border-top: 3px solid #252525;
+  border-radius: 5px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(50, 50, 50, 0.15);
+}
+
+.viewer-panel {
+  width: 100%;
+  height: 100%;
+  background: rgba(22, 22, 20, 0.6);
+  border: 1px solid rgba(35, 35, 33, 0.4);
+  border-radius: 2px;
+  transition: box-shadow 1.5s ease;
+}
+
+/* Backlit strip edge glow — applied via JS class toggle */
+.film-strip-full.is-backlit {
+  background-color: #2a1a10;
+  box-shadow:
+    0 0 25px rgba(200, 150, 60, 0.06),
+    0 0 60px rgba(200, 150, 60, 0.03);
+  transition: background-color 1.5s ease, box-shadow 1.5s ease;
+}
+
 /* --- Film strip container (pinned for horizontal scroll) --- */
 .film-container {
   position: relative;
@@ -423,6 +561,7 @@ img {
   min-height: 280px;
   align-items: stretch;
   flex-shrink: 0;
+  transform-origin: center center;
 }
 
 /* Sprocket holes for full strip */
@@ -457,6 +596,7 @@ img {
   border-radius: 2px;
   overflow: hidden;
   position: relative;
+  cursor: pointer;
 }
 
 .film-strip-full .film-frame img {
@@ -481,6 +621,56 @@ img {
   pointer-events: none;
 }
 
+
+/* --- Film burn on first frames (start-of-roll light leak) --- */
+/* Realistic: bright white overexposed edge → warm orange → fades to nothing */
+/* Light leaks from left (canister opening side) like real 35mm film */
+.film-strip-full .film-frame:nth-child(1)::before,
+.film-strip-full .film-frame:nth-child(2)::before,
+.film-strip-full .film-frame:nth-child(3)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: 2px;
+}
+
+/* Frame 1: Heavy burn — bright white wash from left edge */
+.film-strip-full .film-frame:nth-child(1)::before {
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.82) 0%,
+    rgba(255, 230, 170, 0.6) 8%,
+    rgba(255, 160, 60, 0.45) 22%,
+    rgba(255, 90, 25, 0.25) 40%,
+    rgba(255, 60, 15, 0.08) 60%,
+    transparent 80%
+  );
+}
+
+/* Frame 2: Medium burn — orange/red streak from left */
+.film-strip-full .film-frame:nth-child(2)::before {
+  background: linear-gradient(
+    to right,
+    rgba(255, 180, 80, 0.5) 0%,
+    rgba(255, 120, 40, 0.3) 12%,
+    rgba(255, 80, 20, 0.12) 30%,
+    transparent 55%
+  );
+}
+
+/* Frame 3: Subtle warmth — barely visible hint of leak */
+.film-strip-full .film-frame:nth-child(3)::before {
+  background: linear-gradient(
+    to right,
+    rgba(255, 140, 50, 0.18) 0%,
+    rgba(255, 100, 30, 0.06) 18%,
+    transparent 40%
+  );
+}
+
+
 /* --- Caption bar --- */
 .film-caption-bar {
   position: fixed;
@@ -493,7 +683,7 @@ img {
   justify-content: center;
   gap: 20px;
   padding: 14px 28px;
-  background: rgba(10, 9, 8, 0.85);
+  background: rgba(20, 20, 18, 0.85);
   backdrop-filter: blur(8px);
   opacity: 0;
 }
@@ -511,6 +701,97 @@ img {
   color: var(--text-light);
 }
 
+
+/* --- Lightbox (Change 4) --- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 10, 8, 0.92);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.lightbox.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 90vw;
+  max-height: 85vh;
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 78vh;
+  object-fit: contain;
+  border-radius: 2px;
+  filter: none;
+  transform: scale(0.92);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.4s ease;
+}
+
+.lightbox.is-active .lightbox-img {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.lightbox-caption {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: rgba(237, 228, 220, 0.7);
+  margin-top: 16px;
+  text-align: center;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: var(--text-light);
+  font-size: 2rem;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  z-index: 210;
+}
+.lightbox-close:hover { opacity: 1; }
+
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-light);
+  font-size: 3rem;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: opacity 0.2s;
+  padding: 20px;
+  z-index: 210;
+}
+.lightbox-prev { left: 16px; }
+.lightbox-next { right: 16px; }
+.lightbox-prev:hover,
+.lightbox-next:hover { opacity: 0.9; }
+
+
 /* --- Film page footer --- */
 .film-footer {
   text-align: center;
@@ -526,6 +807,7 @@ img {
   transition: opacity 0.3s ease;
 }
 .film-footer a:hover { opacity: 1; }
+
 
 /* --- Film page responsive --- */
 @media (max-width: 768px) {
@@ -559,5 +841,16 @@ img {
   .film-caption-bar {
     padding: 10px 16px;
     gap: 12px;
+  }
+
+  .lightbox-prev,
+  .lightbox-next {
+    font-size: 2rem;
+    padding: 12px;
+  }
+
+  .lightbox-close {
+    top: 12px;
+    right: 16px;
   }
 }

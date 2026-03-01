@@ -2,11 +2,11 @@
 (function () {
   gsap.registerPlugin();
 
-  const NEGATIVE_FILTER = 'sepia(1) saturate(2.5) brightness(0.38) contrast(1.4) hue-rotate(-15deg)';
-  const CLEAR_FILTER = 'sepia(0) saturate(1) brightness(1) contrast(1) hue-rotate(0deg)';
+  var NEGATIVE_FILTER = 'sepia(1) saturate(2.5) brightness(0.38) contrast(1.4) hue-rotate(-15deg)';
+  var CLEAR_FILTER = 'sepia(0) saturate(1) brightness(1) contrast(1) hue-rotate(0deg)';
 
   /* --- Entrance animations --- */
-  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  var tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
   tl.to('.site-title', { opacity: 1, y: 0, duration: 1 })
     .to('.site-tagline', { opacity: 1, y: 0, duration: 0.7 }, '-=0.5')
@@ -23,47 +23,84 @@
 
 
   /* --- Film packet hover interactions (desktop only) --- */
-  const hasHover = window.matchMedia('(hover: hover)').matches;
+  var hasHover = window.matchMedia('(hover: hover)').matches;
   if (!hasHover) return;
 
-  const activeBucket = document.getElementById('bucket-portraits');
+  var activeBucket = document.getElementById('bucket-portraits');
   if (!activeBucket) return;
 
-  const packet = activeBucket.querySelector('.film-packet');
-  const images = packet.querySelectorAll('.film-frame img');
-  let peekTimer = null;
-  let isPeeking = false;
+  var packet = activeBucket.querySelector('.film-packet');
+  var images = packet.querySelectorAll('.film-frame img');
+  var allFrames = packet.querySelectorAll('.film-frame');
+  var peekTimer = null;
+  var isPeeking = false;
+  var hoveredFrame = null;
 
-  /* Wiggle on hover */
+  /* --- Change 1: Fluid water-like wiggle on hover --- */
   activeBucket.addEventListener('mouseenter', function () {
     gsap.timeline()
-      .to(packet, { rotation: -1.5, duration: 0.08, ease: 'power1.inOut' })
-      .to(packet, { rotation: 1.5, duration: 0.12, ease: 'power1.inOut' })
-      .to(packet, { rotation: -0.8, duration: 0.1, ease: 'power1.inOut' })
-      .to(packet, { rotation: 0, duration: 0.1, ease: 'power1.out' });
+      .to(packet, { rotation: -1.2, y: -2, duration: 0.25, ease: 'sine.inOut' })
+      .to(packet, { rotation: 1.4, y: 1, duration: 0.35, ease: 'sine.inOut' })
+      .to(packet, { rotation: -0.6, y: -1, duration: 0.3, ease: 'sine.inOut' })
+      .to(packet, { rotation: 0.3, y: 0.5, duration: 0.25, ease: 'sine.inOut' })
+      .to(packet, { rotation: 0, y: 0, duration: 0.35, ease: 'elastic.out(0.4, 0.3)' });
 
-    /* Start 2-second peek timer */
+    /* Change 2a: Immediate inviting scale-up */
+    gsap.to(packet, { scale: 1.05, duration: 0.3, ease: 'power2.out' });
+
+    /* Start 2-second peek timer (localized color reveal) */
     peekTimer = setTimeout(function () {
       isPeeking = true;
-      gsap.to(packet, { scale: 1.08, duration: 0.6, ease: 'power2.out' });
-      gsap.to(images, {
-        filter: CLEAR_FILTER,
-        duration: 1.2,
-        stagger: 0.08,
-        ease: 'power2.out',
-      });
+      gsap.to(packet, { scale: 1.12, duration: 0.6, ease: 'power2.out' });
+      /* Only reveal the currently hovered frame */
+      if (hoveredFrame) {
+        var hoveredImg = hoveredFrame.querySelector('img');
+        gsap.to(hoveredImg, {
+          filter: CLEAR_FILTER,
+          duration: 1.2,
+          ease: 'power2.out',
+        });
+      }
     }, 2000);
   });
 
   activeBucket.addEventListener('mouseleave', function () {
     clearTimeout(peekTimer);
     isPeeking = false;
-    gsap.to(packet, { scale: 1, rotation: 0, duration: 0.4, ease: 'power2.out' });
+    hoveredFrame = null;
+    gsap.to(packet, { scale: 1, rotation: 0, y: 0, duration: 0.4, ease: 'power2.out' });
     gsap.to(images, {
       filter: NEGATIVE_FILTER,
       duration: 0.5,
       stagger: 0.04,
       ease: 'power2.in',
+    });
+  });
+
+  /* --- Change 2b: Per-frame color tracking --- */
+  allFrames.forEach(function (frame) {
+    var img = frame.querySelector('img');
+
+    frame.addEventListener('mouseenter', function () {
+      hoveredFrame = frame;
+      /* If already peeking (2s passed), reveal this frame immediately */
+      if (isPeeking) {
+        gsap.to(img, {
+          filter: CLEAR_FILTER,
+          duration: 0.8,
+          ease: 'power2.out',
+        });
+      }
+    });
+
+    frame.addEventListener('mouseleave', function () {
+      if (hoveredFrame === frame) hoveredFrame = null;
+      /* Revert this frame to negative */
+      gsap.to(img, {
+        filter: NEGATIVE_FILTER,
+        duration: 0.5,
+        ease: 'power2.in',
+      });
     });
   });
 
