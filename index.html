@@ -3,100 +3,151 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lil Traumatized Photography Portfolio</title>
+  <title>Lil Traumatized</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
-  <script src="script.js" defer></script>
 </head>
-<body>
-  <header>
-    <h1>Lil Traumatized Photography Portfolio</h1>
-    <nav>
-      <a href="#category1">Dirty Rat Boi</a>
-      <a href="#category2">Other work of mine</a>
-      <a href="#category3">Work that's not mine - but I admire</a>
-    </nav>
-  </header>
+<body class="landing-page">
 
-  <main>
-    <!-- Category 1 -->
-    <section id="category1" class="category">
-      <h2>Dirty Rat Boi - example portraits I want to shoot more of</h2>
-      <div>
-        The theme was habits of their daily life and we wanted to capture photos of the various things they did regularly at home.
-        A large focus was on the kitchen being particularily dirty and the feeling of perpetually cleaning it.
-      </div>
-      <br>
-      <div class="gallery" data-category="Category 1">
-        <img src="Category%201%20-%20Examples/AIV00797.avif" alt="Sorting laundry in the closet" loading="lazy" />
-        <img src="Category%201%20-%20Examples/AIV00930.avif" alt="Writing on their calendar" loading="lazy" />
-        <img src="Category%201%20-%20Examples/AIV00969.avif" alt="At the shrine for regular daily rituals" loading="lazy" />
-        <img src="Category%201%20-%20Examples/AIV01035.avif" alt="Clipping toenails" loading="lazy" />
-        <img src="Category%201%20-%20Examples/AIV01045.avif" alt="Something with floss, a regular habit" loading="lazy" />
-        <img src="Category%201%20-%20Examples/AIV01110.avif" alt="Writing in their journal" loading="lazy" />
-        <img src="Category%201%20-%20Examples/AIV01392.avif" alt="The kitchen is always dirty" loading="lazy" />
-        <img src="Category%201%20-%20Examples/AIV01563.avif" alt="Moody and direct portrait" loading="lazy" />
-        <img src="Category%201%20-%20Examples/AIV01601.avif" alt="The way the leg flows into the body" loading="lazy" />
-        <img src="Category%201%20-%20Examples/AIV01740.avif" alt="They requested this photo in particular, digging through the trash" loading="lazy" />
-        <img src="Category%201%20-%20Examples/AIV01776.avif" alt="General portrait against the backdrop of the kitchen cabinets" loading="lazy" />
-        <img src="Category%201%20-%20Examples/AIV01835.avif" alt="Mirror image" loading="lazy" />
+  <!-- ===== HERO: HELLO + clouds ===== -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-hello">Hello</h1>
+      <p class="hero-sub">I&rsquo;m Lil Traumatized</p>
+    </div>
+
+    <!-- Cloud layers (parallax on scroll) -->
+    <div class="clouds" aria-hidden="true">
+      <div class="cloud cloud--1"></div>
+      <div class="cloud cloud--2"></div>
+      <div class="cloud cloud--3"></div>
+      <div class="cloud cloud--4"></div>
+      <div class="cloud cloud--5"></div>
+      <div class="cloud cloud--6"></div>
+      <div class="cloud cloud--7"></div>
+    </div>
+
+    <div class="scroll-cue">
+      <span class="scroll-cue-text">Scroll down</span>
+      <span class="scroll-cue-arrow">&darr;</span>
+    </div>
+  </section>
+
+  <!-- ===== MAIN CONTENT: revealed below the clouds ===== -->
+  <main class="landing-main">
+    <header class="landing-header">
+      <h2 class="site-title">Lil Traumatized</h2>
+      <p class="site-tagline">Photography Portfolio</p>
+    </header>
+
+    <section class="buckets">
+      <!-- Bucket 1: Portraits — fully wired -->
+      <a href="film.html" class="bucket" id="bucket-portraits">
+        <div class="film-packet">
+          <div class="film-strip">
+            <div class="film-frame"><img src="Category%201%20-%20Examples/AIV00797.avif" alt="" loading="lazy" /></div>
+            <div class="film-frame"><img src="Category%201%20-%20Examples/AIV01563.avif" alt="" loading="lazy" /></div>
+            <div class="film-frame"><img src="Category%201%20-%20Examples/AIV01776.avif" alt="" loading="lazy" /></div>
+          </div>
+          <div class="film-strip">
+            <div class="film-frame"><img src="Category%201%20-%20Examples/AIV00930.avif" alt="" loading="lazy" /></div>
+            <div class="film-frame"><img src="Category%201%20-%20Examples/AIV01110.avif" alt="" loading="lazy" /></div>
+            <div class="film-frame"><img src="Category%201%20-%20Examples/AIV01392.avif" alt="" loading="lazy" /></div>
+          </div>
+        </div>
+        <h2 class="bucket-title">Photos I want to shoot more of</h2>
+      </a>
+
+      <!-- Bucket 2: Other work — polaroid stack -->
+      <div class="bucket" id="bucket-work">
+        <div class="polaroid-stack">
+          <div class="polaroid polaroid--1">
+            <div class="polaroid-photo"><img src="Category%202%20-%20General%20photos/AIV05934.avif" alt="" loading="lazy" /></div>
+          </div>
+          <div class="polaroid polaroid--2">
+            <div class="polaroid-photo"><img src="Category%202%20-%20General%20photos/AIV06003.avif" alt="" loading="lazy" /></div>
+          </div>
+          <div class="polaroid polaroid--3">
+            <div class="polaroid-photo"><img src="Category%202%20-%20General%20photos/AIV06201.avif" alt="" loading="lazy" /></div>
+          </div>
+          <div class="polaroid polaroid--4">
+            <div class="polaroid-photo"><img src="Category%202%20-%20General%20photos/AIV05957.avif" alt="" loading="lazy" /></div>
+          </div>
+          <div class="polaroid polaroid--5">
+            <div class="polaroid-photo"><img src="Category%202%20-%20General%20photos/AIV07119.avif" alt="" loading="lazy" /></div>
+          </div>
+          <div class="polaroid polaroid--6">
+            <div class="polaroid-photo"><img src="Category%202%20-%20General%20photos/AIV08294.avif" alt="" loading="lazy" /></div>
+          </div>
+        </div>
+        <h2 class="bucket-title">My other work</h2>
+        <span class="badge">Coming soon</span>
       </div>
     </section>
 
-    <!-- Category 2 -->
-    <section id="category2" class="category">
-      <h2>Other work of mine</h2>
-      <div class="gallery" data-category="Category 2">
-        <img src="Category%202%20-%20General%20photos/AIV00654.avif" alt="Looking for the light" loading="lazy" />
-        <img src="Category%202%20-%20General%20photos/AIV05837.avif" alt="Returning home from the party" loading="lazy" />
-        <img src="Category%202%20-%20General%20photos/AIV05934.avif" alt="Post party looking fly" loading="lazy" />
-        <img src="Category%202%20-%20General%20photos/AIV05957.avif" alt="Moody texture portrait 1" loading="lazy" />
-        <img src="Category%202%20-%20General%20photos/AIV05995.avif" alt="Moody texture portrait 2" loading="lazy" />
-        <img src="Category%202%20-%20General%20photos/AIV06003.avif" alt="Moody texture portrait 3" loading="lazy" />
-        <img src="Category%202%20-%20General%20photos/AIV06201.avif" alt="Chateau Marmont " loading="lazy" />
-        <img src="Category%202%20-%20General%20photos/AIV06490.avif" alt="This is halloween" loading="lazy" />
-        <img src="Category%202%20-%20General%20photos/AIV06513.avif" alt="Halloween 2" loading="lazy" />
-        <img src="Category%202%20-%20General%20photos/AIV07119.avif" alt="You look lonely" loading="lazy" />
-        <img src="Category%202%20-%20General%20photos/AIV07123.avif" alt="I can fix that" loading="lazy" />
-        <img src="Category%202%20-%20General%20photos/AIV08294.avif" alt="Fake Dad's Guitarist at the Echoplex" loading="lazy" />
-        <img src="Category%202%20-%20General%20photos/AIV08328.avif" alt="The lead singer of Fake Dad performing at the Echoplex" loading="lazy" />
+    <!-- Bucket 3: Video projects — CRT monitor -->
+    <section class="video-section">
+      <div class="bucket bucket-video" id="bucket-video">
+        <div class="crt-monitor">
+          <div class="crt-body">
+            <div class="crt-bezel">
+              <div class="crt-screen">
+                <div class="crt-scanlines"></div>
+                <div class="crt-glow"></div>
+                <div class="crt-static"></div>
+              </div>
+            </div>
+            <div class="crt-base">
+              <div class="crt-power-light"></div>
+            </div>
+          </div>
+        </div>
+        <h2 class="bucket-title">My Video Projects</h2>
+        <span class="badge">Coming soon</span>
       </div>
     </section>
 
-    <!-- Category 3 -->
-    <section id="category3" class="category">
-      <h2>Work that's not mine - but I admire</h2>
-      <div class="gallery" data-category="Category 3">
-        <img src="https://format.creatorcdn.com/a33205b6-a705-4085-b7c0-a826132184d1/0/0/0/0,0,2429,3643,2429,700/0-0-0/979af80d-c2b8-4a22-8a3f-732ab8bda933/1/1/KarelChladek-9572.jpg?fjkss=exp=2071009531~hmac=90cd4a1d68d075a16d941c34342bc2758b245679282f8e047f443391435211c9&467" alt="Shot by Karel Chladek - Public Intimacy" loading="lazy" />
-        <img src="https://images.pixieset.com/41069666/c1e7b5ccbd780add94874ff9cde457bf-large.JPG" alt="Shot by Apogee Films / Myles Tate" loading="lazy" />
-      </div>
+    <!-- ===== GOODBYE ===== -->
+    <section class="goodbye-section">
+      <p class="thank-you-text">Thank you for visiting</p>
+      <h2 class="goodbye-text">Goodbye</h2>
     </section>
+
+    <footer class="landing-footer">
+      <div class="social-links">
+        <a href="https://www.instagram.com/lil_traumatized/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-link">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" />
+            <circle cx="12" cy="12" r="5" />
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@liltraumatized" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="social-link">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" />
+            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor" stroke="none" />
+          </svg>
+        </a>
+        <a href="https://soundcloud.com/liltraumatized" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud" class="social-link">
+          <svg viewBox="0 0 32 32" width="32" height="32" fill="currentColor" stroke="none">
+            <path d="M2.7 21.5c-.4 0-.7-.3-.7-.7v-5.6c0-.4.3-.7.7-.7s.7.3.7.7v5.6c0 .4-.3.7-.7.7zM5.7 22.5c-.4 0-.7-.3-.7-.7V13.2c0-.4.3-.7.7-.7s.7.3.7.7v8.6c0 .4-.3.7-.7.7zM8.7 22.5c-.4 0-.7-.3-.7-.7V11.2c0-.4.3-.7.7-.7s.7.3.7.7v10.6c0 .4-.3.7-.7.7zM11.7 22.5c-.4 0-.7-.3-.7-.7V9.2c0-.4.3-.7.7-.7s.7.3.7.7v12.6c0 .4-.3.7-.7.7zM14.7 22.5c-.4 0-.7-.3-.7-.7V10.7c0-.4.3-.7.7-.7s.7.3.7.7v11.1c0 .4-.3.7-.7.7z"/>
+            <path d="M25.5 22.5h-7.8c-.4 0-.7-.3-.7-.7V10.7c0-.3.2-.6.5-.7.6-.2 1.3-.3 2-.3 3.6 0 6.5 2.9 6.5 6.5 0 .5-.1 1-.2 1.5 1.7.5 3 2.1 3 3.9 0 2.2-1.7 3.9-3.8 3.9h.5z"/>
+          </svg>
+        </a>
+      </div>
+      <p class="copyright">&copy; 2025 Lil Traumatized Photography</p>
+    </footer>
   </main>
 
-  <div class="email">
-    <h3>
-    Email me at photoshoot@liltraumatized.com to schedule.
-    </h3>
-  </div>
-
-  <!-- Lightbox -->
-  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
-    <button class="lb-btn lb-close" aria-label="Close (Esc)">&times;</button>
-    <button class="lb-btn lb-prev" aria-label="Previous (←)">&#10094;</button>
-    <img id="lightbox-image" alt="" />
-    <div id="lightbox-caption" class="lb-caption" aria-live="polite"></div>
-    <button class="lb-btn lb-next" aria-label="Next (→)">&#10095;</button>
-  </div>
-
-<script>
-  document.addEventListener("contextmenu", function(e) {
-    if (e.target.tagName === "IMG") {
-      e.preventDefault();
-    }
-  });
-</script>
-
-  <footer>
-    <p>&copy; 2025 Lil Traumatized Photography</p>
-  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('contextmenu', function (e) {
+      if (e.target.tagName === 'IMG') e.preventDefault();
+    });
+  </script>
 </body>
 </html>
