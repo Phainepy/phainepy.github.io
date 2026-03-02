@@ -6,6 +6,8 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
+  color-scheme: light;
+
   /* Sky gradient */
   --sky-top: #fef2f4;
   --sky-pink: #f0c0c8;
@@ -88,7 +90,7 @@ img {
 
 .hero-hello {
   font-family: var(--font-display);
-  font-size: clamp(5rem, 18vw, 14rem);
+  font-size: clamp(6rem, 18vw, 14rem);
   font-weight: 300;
   letter-spacing: 0.02em;
   line-height: 1;
@@ -113,7 +115,7 @@ img {
   display: inline-block;
   opacity: 0;
   margin: 0 0.15em;
-  animation: flickerA 4s ease-in-out 1s infinite;
+  animation: flickerA 4s ease-in-out 2s infinite;
 }
 
 @keyframes flickerA {
