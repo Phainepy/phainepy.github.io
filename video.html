@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Video Projects — Lil Traumatized</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=5" />
+</head>
+<body class="video-page">
+
+  <!-- Phase 1: The "screen" — starts fullscreen, zooms out to reveal CRT frame -->
+  <div class="video-zoom-wrapper">
+    <div class="video-crt-frame">
+      <div class="video-crt-bezel">
+        <div class="video-screen">
+          <!-- Scanlines + barrel warp applied via CSS -->
+          <div class="video-screen-inner">
+            <div class="video-scanlines"></div>
+            <div class="video-screen-content">
+              <p class="hacker-text hacker-scroll-cue">scroll down</p>
+              <span class="hacker-cursor">_</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="video-crt-base">
+        <div class="video-power-light"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 2: Old-school "VidEeoh" page (retro YouTube ~2006) -->
+  <div class="video-content">
+    <div class="yt-page">
+
+      <!-- Top bar: logo + search + links -->
+      <header class="yt-header">
+        <div class="yt-header-inner">
+          <a href="index.html" class="yt-logo">
+            <span class="yt-logo-vid">Vid</span><span class="yt-logo-ee">Ee</span><span class="yt-logo-oh">oh</span>
+          </a>
+          <div class="yt-search">
+            <input type="text" class="yt-search-input" placeholder="Search" disabled />
+            <button class="yt-search-btn" disabled>Search</button>
+          </div>
+          <nav class="yt-top-nav">
+            <span class="yt-top-link">Home</span>
+            <span class="yt-top-link">Videos</span>
+            <span class="yt-top-link">Channels</span>
+          </nav>
+        </div>
+      </header>
+
+      <!-- Sub-header: Browse / Upload tabs -->
+      <div class="yt-tabs-bar">
+        <div class="yt-tabs-inner">
+          <span class="yt-tab yt-tab-active">Browse</span>
+          <span class="yt-tab">Upload</span>
+        </div>
+      </div>
+
+      <!-- Main layout: sidebar + content -->
+      <div class="yt-body">
+        <!-- Left sidebar -->
+        <aside class="yt-sidebar">
+          <div class="yt-signin-box">
+            <p class="yt-signin-text">Sign in to VidEeoh!</p>
+            <button class="yt-signin-btn" disabled>Sign In</button>
+            <p class="yt-signin-sub">Don&rsquo;t have an account?<br /><span class="yt-signup-link">Sign Up</span></p>
+          </div>
+          <div class="yt-categories">
+            <h4 class="yt-cat-heading">Categories</h4>
+            <ul class="yt-cat-list">
+              <li class="yt-cat-item yt-cat-active">Film &amp; Animation</li>
+              <li class="yt-cat-item">Music</li>
+              <li class="yt-cat-item">People &amp; Blogs</li>
+              <li class="yt-cat-item">Comedy</li>
+              <li class="yt-cat-item">Entertainment</li>
+              <li class="yt-cat-item">Howto &amp; Style</li>
+              <li class="yt-cat-item">Education</li>
+              <li class="yt-cat-item">Science &amp; Tech</li>
+            </ul>
+          </div>
+        </aside>
+
+        <!-- Video content area -->
+        <main class="yt-main">
+          <h2 class="yt-section-title">Featured Videos</h2>
+          <div class="yt-video-grid">
+
+            <a href="https://www.youtube.com/watch?v=9Uv1k4FwdbA" target="_blank" rel="noopener noreferrer" class="yt-video-card">
+              <div class="yt-thumb-wrap">
+                <img src="Category%203%20-%20Youtube%20Video%20Projects/EDEN%20Thumbnail%203.avif" alt="EDEN" loading="lazy" />
+                <span class="yt-duration">3:42</span>
+              </div>
+              <div class="yt-video-info">
+                <h3 class="yt-video-title">EDEN</h3>
+                <p class="yt-video-meta">LilTraumatized</p>
+                <p class="yt-video-views">1,247 views</p>
+              </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=_s7fynJ8_o4" target="_blank" rel="noopener noreferrer" class="yt-video-card">
+              <div class="yt-thumb-wrap">
+                <img src="Category%203%20-%20Youtube%20Video%20Projects/Call%20Your%20Mom%20Thumbnail.avif" alt="Call Your Mom" loading="lazy" />
+                <span class="yt-duration">4:15</span>
+              </div>
+              <div class="yt-video-info">
+                <h3 class="yt-video-title">Call Your Mom</h3>
+                <p class="yt-video-meta">LilTraumatized</p>
+                <p class="yt-video-views">863 views</p>
+              </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=Ex5Oo6xEp3E&t=110s" target="_blank" rel="noopener noreferrer" class="yt-video-card">
+              <div class="yt-thumb-wrap">
+                <img src="Category%203%20-%20Youtube%20Video%20Projects/Sisters%20Thumnail.avif" alt="Sisters" loading="lazy" />
+                <span class="yt-duration">5:08</span>
+              </div>
+              <div class="yt-video-info">
+                <h3 class="yt-video-title">Sisters</h3>
+                <p class="yt-video-meta">LilTraumatized</p>
+                <p class="yt-video-views">2,104 views</p>
+              </div>
+            </a>
+
+          </div>
+        </main>
+      </div>
+
+      <!-- Footer -->
+      <footer class="yt-footer">
+        <p class="yt-footer-text">Copyright &copy; 2006 VidEeoh, LLC</p>
+        <div class="yt-footer-links">
+          <span>About</span>
+          <span>Help</span>
+          <span>Terms</span>
+          <span>Privacy</span>
+          <span>Safety</span>
+        </div>
+        <a href="index.html" class="yt-back-link">&larr; Back to portfolio</a>
+      </footer>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/ScrollTrigger.min.js"></script>
+  <script src="video.js?v=3"></script>
+  <script>
+    document.addEventListener('contextmenu', function (e) {
+      if (e.target.tagName === 'IMG') e.preventDefault();
+    });
+  </script>
+</body>
+</html>

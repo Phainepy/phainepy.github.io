@@ -317,5 +317,157 @@
         },
       });
     }
+
+    /* Click transition: polaroids scatter outward → navigate to work.html */
+    workBucket.addEventListener('click', function (e) {
+      e.preventDefault();
+      var href = workBucket.getAttribute('href');
+
+      /* Stop any ongoing flip */
+      clearTimeout(flipTimer);
+      clearTimeout(flipTimeout);
+      isFlipping = false;
+
+      /* Scatter polaroids outward with random rotation */
+      polaroids.forEach(function (p, i) {
+        var angle = (Math.random() - 0.5) * 60;
+        var scatterX = (Math.random() - 0.5) * 300;
+        var scatterY = -(80 + Math.random() * 120);
+        gsap.to(p, {
+          x: scatterX,
+          y: scatterY,
+          rotation: angle,
+          opacity: 0,
+          duration: 0.5,
+          ease: 'power2.in',
+          delay: i * 0.03,
+        });
+      });
+
+      /* Fade out other page elements */
+      gsap.to('.landing-header, .bucket:not(#bucket-work), .landing-footer, .goodbye-section, .video-section', {
+        opacity: 0,
+        duration: 0.4,
+        ease: 'power2.in',
+      });
+
+      setTimeout(function () {
+        window.location.href = href;
+      }, 500);
+    });
+  }
+
+
+  /* ===========================================
+     BUCKET 3: CRT Monitor — thumbnail cycling on hover
+     =========================================== */
+
+  var videoBucket = document.getElementById('bucket-video');
+  if (videoBucket) {
+    var crtScreen = videoBucket.querySelector('.crt-screen');
+    var thumbs = videoBucket.querySelectorAll('.crt-thumb');
+    var crtHoverTimer = null;
+    var crtCycleTimer = null;
+    var crtStaticTimer = null;
+    var currentThumb = -1;
+    var isCrtAnimating = false;
+
+    /* Create a static flash overlay element */
+    var staticFlash = document.createElement('div');
+    staticFlash.className = 'crt-static-flash';
+    crtScreen.appendChild(staticFlash);
+
+    function showStaticFlash(duration, cb) {
+      staticFlash.style.opacity = '1';
+      setTimeout(function () {
+        staticFlash.style.opacity = '0';
+        if (cb) cb();
+      }, duration);
+    }
+
+    function showThumb(index) {
+      thumbs.forEach(function (t, i) {
+        if (i === index) {
+          t.classList.add('crt-thumb-active');
+        } else {
+          t.classList.remove('crt-thumb-active');
+        }
+      });
+    }
+
+    function cycleNext() {
+      if (!isCrtAnimating) return;
+
+      /* Static flash for 120ms, then show next thumbnail */
+      showStaticFlash(120, function () {
+        currentThumb = (currentThumb + 1) % thumbs.length;
+        showThumb(currentThumb);
+
+        /* Hold the thumbnail for 1.8s, then cycle */
+        crtCycleTimer = setTimeout(function () {
+          cycleNext();
+        }, 1800);
+      });
+    }
+
+    videoBucket.addEventListener('mouseenter', function () {
+      isCrtAnimating = true;
+
+      /* Phase 1: Screen powers on — hold the glow/static for 600ms */
+      crtHoverTimer = setTimeout(function () {
+        /* Phase 2: Static flash then first thumbnail */
+        showStaticFlash(150, function () {
+          currentThumb = 0;
+          showThumb(currentThumb);
+
+          /* Phase 3: Start cycling after 1.8s on first thumb */
+          crtCycleTimer = setTimeout(function () {
+            cycleNext();
+          }, 1800);
+        });
+      }, 600);
+    });
+
+    videoBucket.addEventListener('mouseleave', function () {
+      isCrtAnimating = false;
+      clearTimeout(crtHoverTimer);
+      clearTimeout(crtCycleTimer);
+      clearTimeout(crtStaticTimer);
+      currentThumb = -1;
+
+      /* Hide everything */
+      thumbs.forEach(function (t) { t.classList.remove('crt-thumb-active'); });
+      staticFlash.style.opacity = '0';
+    });
+
+    /* Click transition to video.html */
+    if (hasHover) {
+      videoBucket.addEventListener('click', function (e) {
+        e.preventDefault();
+        var href = videoBucket.getAttribute('href');
+
+        /* Stop cycling */
+        isCrtAnimating = false;
+        clearTimeout(crtHoverTimer);
+        clearTimeout(crtCycleTimer);
+
+        /* CRT zoom-in effect */
+        gsap.to('.crt-monitor', {
+          scale: 4,
+          opacity: 0,
+          duration: 0.7,
+          ease: 'power3.in',
+        });
+        gsap.to('.landing-header, .bucket:not(#bucket-video), .landing-footer, .goodbye-section, .bucket-title, .badge', {
+          opacity: 0,
+          duration: 0.4,
+          ease: 'power2.in',
+        });
+
+        setTimeout(function () {
+          window.location.href = href;
+        }, 650);
+      });
+    }
   }
 })();

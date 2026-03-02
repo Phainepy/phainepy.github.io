@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=4" />
 </head>
 <body class="landing-page">
 
@@ -61,7 +61,7 @@
       </a>
 
       <!-- Bucket 2: Other work — polaroid stack -->
-      <div class="bucket" id="bucket-work">
+      <a href="work.html" class="bucket" id="bucket-work">
         <div class="polaroid-stack">
           <div class="polaroid polaroid--1">
             <div class="polaroid-photo"><img src="Category%202%20-%20General%20photos/AIV05934.avif" alt="" loading="lazy" /></div>
@@ -83,13 +83,12 @@
           </div>
         </div>
         <h2 class="bucket-title">My other work</h2>
-        <span class="badge">Coming soon</span>
-      </div>
+      </a>
     </section>
 
     <!-- Bucket 3: Video projects — CRT monitor -->
     <section class="video-section">
-      <div class="bucket bucket-video" id="bucket-video">
+      <a href="video.html" class="bucket bucket-video" id="bucket-video">
         <div class="crt-monitor">
           <div class="crt-body">
             <div class="crt-bezel">
@@ -97,6 +96,11 @@
                 <div class="crt-scanlines"></div>
                 <div class="crt-glow"></div>
                 <div class="crt-static"></div>
+                <div class="crt-thumbnails">
+                  <img src="Category%203%20-%20Youtube%20Video%20Projects/Call%20Your%20Mom%20Thumbnail.avif" alt="" class="crt-thumb" loading="lazy" />
+                  <img src="Category%203%20-%20Youtube%20Video%20Projects/EDEN%20Thumbnail%203.avif" alt="" class="crt-thumb" loading="lazy" />
+                  <img src="Category%203%20-%20Youtube%20Video%20Projects/Sisters%20Thumnail.avif" alt="" class="crt-thumb" loading="lazy" />
+                </div>
               </div>
             </div>
             <div class="crt-base">
@@ -105,8 +109,7 @@
           </div>
         </div>
         <h2 class="bucket-title">My Video Projects</h2>
-        <span class="badge">Coming soon</span>
-      </div>
+      </a>
     </section>
 
     <!-- ===== GOODBYE ===== -->
@@ -133,7 +136,7 @@
         <a href="https://soundcloud.com/liltraumatized" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud" class="social-link">
           <svg viewBox="0 0 32 32" width="32" height="32" fill="currentColor" stroke="none">
             <path d="M2.7 21.5c-.4 0-.7-.3-.7-.7v-5.6c0-.4.3-.7.7-.7s.7.3.7.7v5.6c0 .4-.3.7-.7.7zM5.7 22.5c-.4 0-.7-.3-.7-.7V13.2c0-.4.3-.7.7-.7s.7.3.7.7v8.6c0 .4-.3.7-.7.7zM8.7 22.5c-.4 0-.7-.3-.7-.7V11.2c0-.4.3-.7.7-.7s.7.3.7.7v10.6c0 .4-.3.7-.7.7zM11.7 22.5c-.4 0-.7-.3-.7-.7V9.2c0-.4.3-.7.7-.7s.7.3.7.7v12.6c0 .4-.3.7-.7.7zM14.7 22.5c-.4 0-.7-.3-.7-.7V10.7c0-.4.3-.7.7-.7s.7.3.7.7v11.1c0 .4-.3.7-.7.7z"/>
-            <path d="M25.5 22.5h-7.8c-.4 0-.7-.3-.7-.7V10.7c0-.3.2-.6.5-.7.6-.2 1.3-.3 2-.3 3.6 0 6.5 2.9 6.5 6.5 0 .5-.1 1-.2 1.5 1.7.5 3 2.1 3 3.9 0 2.2-1.7 3.9-3.8 3.9h.5z"/>
+            <path d="M25.5 22.5h-7.8c-.4 0-.7-.3-.7-.7V10.7c0-.3.2-.6.5-.7.6-.2 1.3-.3 2-.3 3.6 0 6.5 2.9 6.5 6.5 0 .5-.1 1-.2 1.5 1.7.5 3 2.1 3 3.9 0 2.2-1.8 4-4 4z"/>
           </svg>
         </a>
       </div>
@@ -143,7 +146,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/ScrollTrigger.min.js"></script>
-  <script src="script.js"></script>
+  <script src="script.js?v=4"></script>
   <script>
     document.addEventListener('contextmenu', function (e) {
       if (e.target.tagName === 'IMG') e.preventDefault();
