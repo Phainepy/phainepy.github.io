@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=4" />
+  <link rel="stylesheet" href="styles.css?v=15" />
 </head>
 <body class="landing-page">
 
@@ -15,7 +15,7 @@
   <section class="hero">
     <div class="hero-content">
       <h1 class="hero-hello">Hello</h1>
-      <p class="hero-sub">I&rsquo;m Lil Traumatized</p>
+      <p class="hero-sub">I&rsquo;m <span class="hero-a">a</span> Lil Traumatized</p>
     </div>
 
     <!-- Cloud layers (parallax on scroll) -->
@@ -35,12 +35,23 @@
     </div>
   </section>
 
+  <!-- Floating signature — scrolls with page, left side -->
+  <img src="Other%20Art%20Resources/Lil%20Traumatized%20Signature.PNG" alt="Lil Traumatized" class="floating-signature" />
+
   <!-- ===== MAIN CONTENT: revealed below the clouds ===== -->
   <main class="landing-main">
-    <header class="landing-header">
-      <h2 class="site-title">Lil Traumatized</h2>
-      <p class="site-tagline">Photography Portfolio</p>
-    </header>
+    <section class="about-me">
+      <p class="about-text">I&rsquo;m Lil Traumatized, and I have a deep appreciation and love for visual art. As an art appreciator, I&rsquo;m drawn to striking, unique visual styles, particularly in animation and illustration.</p>
+      <p class="about-text">In 2025, I found new inspiration to create more art myself, and I&rsquo;ve been working across photography, videography, and 2D animation. I&rsquo;ve also started DJing for myself.</p>
+      <p class="about-label">Quick facts:</p>
+      <ul class="about-facts">
+        <li>Based out of Los Angeles.</li>
+        <li>My biggest hobby is friendship.</li>
+        <li>I&rsquo;m most technically proficient in photography.</li>
+        <li>I love music and attend festivals and concerts whenever I can.</li>
+      </ul>
+      <p class="about-text about-closing">My choice of artist name comes from a love of Rap Music and the various musical artists that prepend their names with Lil. Similarly I like the play on words that not only am I <em>lil traumatized</em>, I myself am a lil traumatized. Being a human on this planet, you yourself are also a lil traumatized. We&rsquo;re all a lil traumatized.</p>
+    </section>
 
     <section class="buckets">
       <!-- Bucket 1: Portraits — fully wired -->
@@ -57,7 +68,7 @@
             <div class="film-frame"><img src="Category%201%20-%20Examples/AIV01392.avif" alt="" loading="lazy" /></div>
           </div>
         </div>
-        <h2 class="bucket-title">Photos I want to shoot more of</h2>
+        <h2 class="bucket-title">I want to shoot more photos like this</h2>
       </a>
 
       <!-- Bucket 2: Other work — polaroid stack -->
@@ -82,7 +93,7 @@
             <div class="polaroid-photo"><img src="Category%202%20-%20General%20photos/AIV08294.avif" alt="" loading="lazy" /></div>
           </div>
         </div>
-        <h2 class="bucket-title">My other work</h2>
+        <h2 class="bucket-title">My other photography work</h2>
       </a>
     </section>
 
@@ -146,7 +157,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/ScrollTrigger.min.js"></script>
-  <script src="script.js?v=4"></script>
+  <script src="script.js?v=12"></script>
   <script>
     document.addEventListener('contextmenu', function (e) {
       if (e.target.tagName === 'IMG') e.preventDefault();

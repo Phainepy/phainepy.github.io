@@ -61,22 +61,43 @@
      MAIN CONTENT: entrance animations
      =========================================== */
 
-  /* Title + tagline + buckets + footer entrance */
+  /* Floating signature: show once scrolled past hero */
+  var sig = document.querySelector('.floating-signature');
+  if (sig) {
+    ScrollTrigger.create({
+      trigger: '.landing-main',
+      start: 'top 80%',
+      onEnter: function () { sig.classList.add('sig-visible'); },
+      onLeaveBack: function () { sig.classList.remove('sig-visible'); },
+    });
+  }
+
+  /* Buckets + footer entrance */
   ScrollTrigger.create({
     trigger: '.landing-main',
     start: 'top 80%',
     once: true,
     onEnter: function () {
       var tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-      tl.to('.site-title', { opacity: 1, y: 0, duration: 1 })
-        .to('.site-tagline', { opacity: 1, y: 0, duration: 0.7 }, '-=0.5')
-        .to('.bucket', {
+      tl.to('.bucket', {
           opacity: 1,
           y: 0,
           duration: 0.8,
           stagger: 0.15,
         }, '-=0.3')
         .to('.landing-footer', { opacity: 1, duration: 0.6 }, '-=0.3');
+    },
+  });
+
+  /* About section: scrub opacity from 0.4 → 1 as you scroll through it */
+  gsap.to('.about-me', {
+    opacity: 1,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.about-me',
+      start: 'top 75%',
+      end: 'bottom 40%',
+      scrub: 0.5,
     },
   });
 
@@ -135,19 +156,17 @@
     activeBucket.addEventListener('mouseenter', function () {
       gsap.to(packet, { scale: 1.05, duration: 0.4, ease: 'power2.out' });
 
-      /* Start 2-second peek timer (localized color reveal) */
-      peekTimer = setTimeout(function () {
-        isPeeking = true;
-        gsap.to(packet, { scale: 1.12, duration: 0.6, ease: 'power2.out' });
-        if (hoveredFrame) {
-          var hoveredImg = hoveredFrame.querySelector('img');
-          gsap.to(hoveredImg, {
-            filter: CLEAR_FILTER,
-            duration: 1.2,
-            ease: 'power2.out',
-          });
-        }
-      }, 2000);
+      /* Immediately start localized color reveal */
+      isPeeking = true;
+      gsap.to(packet, { scale: 1.12, duration: 0.6, ease: 'power2.out' });
+      if (hoveredFrame) {
+        var hoveredImg = hoveredFrame.querySelector('img');
+        gsap.to(hoveredImg, {
+          filter: CLEAR_FILTER,
+          duration: 1.2,
+          ease: 'power2.out',
+        });
+      }
     });
 
     activeBucket.addEventListener('mouseleave', function () {
@@ -246,15 +265,13 @@
       }
     }
 
-    /* Scale up on hover, start flip after 2s */
+    /* Scale up on hover, start flip immediately */
     workBucket.addEventListener('mouseenter', function () {
       gsap.to(stack, { scale: 1.05, duration: 0.3, ease: 'power2.out' });
 
-      /* After 1.5 seconds, start flip-through */
-      flipTimer = setTimeout(function () {
-        isFlipping = true;
-        doFlip();
-      }, 1500);
+      /* Immediately start flip-through */
+      isFlipping = true;
+      doFlip();
     });
 
     workBucket.addEventListener('mouseleave', function () {
