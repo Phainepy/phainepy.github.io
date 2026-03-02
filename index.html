@@ -11,87 +11,138 @@
 </head>
 <body class="landing-page">
 
-  <header class="landing-header">
-    <h1 class="site-title">Lil Traumatized</h1>
-    <p class="site-tagline">Photography Portfolio</p>
-  </header>
-
-  <section class="buckets">
-    <!-- Bucket 1: Portraits — fully wired -->
-    <a href="film.html" class="bucket" id="bucket-portraits">
-      <div class="film-packet">
-        <div class="film-strip">
-          <div class="film-frame"><img src="Category%201%20-%20Examples/AIV00797.avif" alt="" loading="lazy" /></div>
-          <div class="film-frame"><img src="Category%201%20-%20Examples/AIV01563.avif" alt="" loading="lazy" /></div>
-          <div class="film-frame"><img src="Category%201%20-%20Examples/AIV01776.avif" alt="" loading="lazy" /></div>
-        </div>
-        <div class="film-strip">
-          <div class="film-frame"><img src="Category%201%20-%20Examples/AIV00930.avif" alt="" loading="lazy" /></div>
-          <div class="film-frame"><img src="Category%201%20-%20Examples/AIV01110.avif" alt="" loading="lazy" /></div>
-          <div class="film-frame"><img src="Category%201%20-%20Examples/AIV01392.avif" alt="" loading="lazy" /></div>
-        </div>
-      </div>
-      <h2 class="bucket-title">Photos I want to shoot more of</h2>
-    </a>
-
-    <!-- Bucket 2: Other work — placeholder -->
-    <div class="bucket bucket--placeholder" id="bucket-work">
-      <div class="film-packet">
-        <div class="film-strip">
-          <div class="film-frame"><img src="Category%202%20-%20General%20photos/AIV05934.avif" alt="" loading="lazy" /></div>
-          <div class="film-frame"><img src="Category%202%20-%20General%20photos/AIV06003.avif" alt="" loading="lazy" /></div>
-          <div class="film-frame"><img src="Category%202%20-%20General%20photos/AIV06201.avif" alt="" loading="lazy" /></div>
-        </div>
-        <div class="film-strip">
-          <div class="film-frame"><img src="Category%202%20-%20General%20photos/AIV05957.avif" alt="" loading="lazy" /></div>
-          <div class="film-frame"><img src="Category%202%20-%20General%20photos/AIV07119.avif" alt="" loading="lazy" /></div>
-          <div class="film-frame"><img src="Category%202%20-%20General%20photos/AIV08294.avif" alt="" loading="lazy" /></div>
-        </div>
-      </div>
-      <h2 class="bucket-title">My other work</h2>
-      <span class="badge">Coming soon</span>
+  <!-- ===== HERO: HELLO + clouds ===== -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-hello">Hello</h1>
+      <p class="hero-sub">I&rsquo;m Lil Traumatized</p>
     </div>
 
-    <!-- Bucket 3: Work I admire — placeholder -->
-    <div class="bucket bucket--placeholder" id="bucket-admire">
-      <div class="bucket-placeholder-visual">
-        <div class="crt-shell">
-          <div class="crt-screen"></div>
-          <div class="crt-base"></div>
-        </div>
-      </div>
-      <h2 class="bucket-title">Work I admire</h2>
-      <span class="badge">Coming soon</span>
+    <!-- Cloud layers (parallax on scroll) -->
+    <div class="clouds" aria-hidden="true">
+      <div class="cloud cloud--1"></div>
+      <div class="cloud cloud--2"></div>
+      <div class="cloud cloud--3"></div>
+      <div class="cloud cloud--4"></div>
+      <div class="cloud cloud--5"></div>
+      <div class="cloud cloud--6"></div>
+      <div class="cloud cloud--7"></div>
+    </div>
+
+    <div class="scroll-cue">
+      <span class="scroll-cue-text">Scroll down</span>
+      <span class="scroll-cue-arrow">&darr;</span>
     </div>
   </section>
 
-  <footer class="landing-footer">
-    <div class="social-links">
-      <a href="https://www.instagram.com/lil_traumatized/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-link">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="2" width="20" height="20" rx="5" />
-          <circle cx="12" cy="12" r="5" />
-          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-        </svg>
+  <!-- ===== MAIN CONTENT: revealed below the clouds ===== -->
+  <main class="landing-main">
+    <header class="landing-header">
+      <h2 class="site-title">Lil Traumatized</h2>
+      <p class="site-tagline">Photography Portfolio</p>
+    </header>
+
+    <section class="buckets">
+      <!-- Bucket 1: Portraits — fully wired -->
+      <a href="film.html" class="bucket" id="bucket-portraits">
+        <div class="film-packet">
+          <div class="film-strip">
+            <div class="film-frame"><img src="Category%201%20-%20Examples/AIV00797.avif" alt="" loading="lazy" /></div>
+            <div class="film-frame"><img src="Category%201%20-%20Examples/AIV01563.avif" alt="" loading="lazy" /></div>
+            <div class="film-frame"><img src="Category%201%20-%20Examples/AIV01776.avif" alt="" loading="lazy" /></div>
+          </div>
+          <div class="film-strip">
+            <div class="film-frame"><img src="Category%201%20-%20Examples/AIV00930.avif" alt="" loading="lazy" /></div>
+            <div class="film-frame"><img src="Category%201%20-%20Examples/AIV01110.avif" alt="" loading="lazy" /></div>
+            <div class="film-frame"><img src="Category%201%20-%20Examples/AIV01392.avif" alt="" loading="lazy" /></div>
+          </div>
+        </div>
+        <h2 class="bucket-title">Photos I want to shoot more of</h2>
       </a>
-      <a href="https://www.youtube.com/@liltraumatized" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="social-link">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" />
-          <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor" stroke="none" />
-        </svg>
-      </a>
-      <a href="https://soundcloud.com/liltraumatized" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud" class="social-link">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M3 18v-4m3 4V10m3 8V8m3 10V6m3 12V9m3 9V7" stroke-linecap="round" />
-          <path d="M21 11c1.1 0 2 .9 2 2s-.9 2-2 2h-3V9.5c0-1.38 1.12-2.5 2.5-2.5.5 0 .97.15 1.36.4" />
-        </svg>
-      </a>
-    </div>
-    <a href="mailto:photoshoot@liltraumatized.com" class="contact-link">photoshoot@liltraumatized.com</a>
-    <p class="copyright">&copy; 2025 Lil Traumatized Photography</p>
-  </footer>
+
+      <!-- Bucket 2: Other work — polaroid stack -->
+      <div class="bucket" id="bucket-work">
+        <div class="polaroid-stack">
+          <div class="polaroid polaroid--1">
+            <div class="polaroid-photo"><img src="Category%202%20-%20General%20photos/AIV05934.avif" alt="" loading="lazy" /></div>
+          </div>
+          <div class="polaroid polaroid--2">
+            <div class="polaroid-photo"><img src="Category%202%20-%20General%20photos/AIV06003.avif" alt="" loading="lazy" /></div>
+          </div>
+          <div class="polaroid polaroid--3">
+            <div class="polaroid-photo"><img src="Category%202%20-%20General%20photos/AIV06201.avif" alt="" loading="lazy" /></div>
+          </div>
+          <div class="polaroid polaroid--4">
+            <div class="polaroid-photo"><img src="Category%202%20-%20General%20photos/AIV05957.avif" alt="" loading="lazy" /></div>
+          </div>
+          <div class="polaroid polaroid--5">
+            <div class="polaroid-photo"><img src="Category%202%20-%20General%20photos/AIV07119.avif" alt="" loading="lazy" /></div>
+          </div>
+          <div class="polaroid polaroid--6">
+            <div class="polaroid-photo"><img src="Category%202%20-%20General%20photos/AIV08294.avif" alt="" loading="lazy" /></div>
+          </div>
+        </div>
+        <h2 class="bucket-title">My other work</h2>
+        <span class="badge">Coming soon</span>
+      </div>
+    </section>
+
+    <!-- Bucket 3: Video projects — CRT monitor -->
+    <section class="video-section">
+      <div class="bucket bucket-video" id="bucket-video">
+        <div class="crt-monitor">
+          <div class="crt-body">
+            <div class="crt-bezel">
+              <div class="crt-screen">
+                <div class="crt-scanlines"></div>
+                <div class="crt-glow"></div>
+                <div class="crt-static"></div>
+              </div>
+            </div>
+            <div class="crt-base">
+              <div class="crt-power-light"></div>
+            </div>
+          </div>
+        </div>
+        <h2 class="bucket-title">My Video Projects</h2>
+        <span class="badge">Coming soon</span>
+      </div>
+    </section>
+
+    <!-- ===== GOODBYE ===== -->
+    <section class="goodbye-section">
+      <p class="thank-you-text">Thank you for visiting</p>
+      <h2 class="goodbye-text">Goodbye</h2>
+    </section>
+
+    <footer class="landing-footer">
+      <div class="social-links">
+        <a href="https://www.instagram.com/lil_traumatized/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-link">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" />
+            <circle cx="12" cy="12" r="5" />
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@liltraumatized" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="social-link">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" />
+            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor" stroke="none" />
+          </svg>
+        </a>
+        <a href="https://soundcloud.com/liltraumatized" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud" class="social-link">
+          <svg viewBox="0 0 32 32" width="32" height="32" fill="currentColor" stroke="none">
+            <path d="M2.7 21.5c-.4 0-.7-.3-.7-.7v-5.6c0-.4.3-.7.7-.7s.7.3.7.7v5.6c0 .4-.3.7-.7.7zM5.7 22.5c-.4 0-.7-.3-.7-.7V13.2c0-.4.3-.7.7-.7s.7.3.7.7v8.6c0 .4-.3.7-.7.7zM8.7 22.5c-.4 0-.7-.3-.7-.7V11.2c0-.4.3-.7.7-.7s.7.3.7.7v10.6c0 .4-.3.7-.7.7zM11.7 22.5c-.4 0-.7-.3-.7-.7V9.2c0-.4.3-.7.7-.7s.7.3.7.7v12.6c0 .4-.3.7-.7.7zM14.7 22.5c-.4 0-.7-.3-.7-.7V10.7c0-.4.3-.7.7-.7s.7.3.7.7v11.1c0 .4-.3.7-.7.7z"/>
+            <path d="M25.5 22.5h-7.8c-.4 0-.7-.3-.7-.7V10.7c0-.3.2-.6.5-.7.6-.2 1.3-.3 2-.3 3.6 0 6.5 2.9 6.5 6.5 0 .5-.1 1-.2 1.5 1.7.5 3 2.1 3 3.9 0 2.2-1.7 3.9-3.8 3.9h.5z"/>
+          </svg>
+        </a>
+      </div>
+      <p class="copyright">&copy; 2025 Lil Traumatized Photography</p>
+    </footer>
+  </main>
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/ScrollTrigger.min.js"></script>
   <script src="script.js"></script>
   <script>
     document.addEventListener('contextmenu', function (e) {

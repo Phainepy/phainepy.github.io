@@ -1,4 +1,4 @@
-/* Film page — horizontal scroll, light table, lightbox, film burns */
+/* Film page — horizontal scroll, light table, lightbox */
 (function () {
   gsap.registerPlugin(ScrollTrigger);
 
@@ -32,7 +32,7 @@
     scrollTrigger: {
       trigger: '.film-container',
       pin: true,
-      scrub: 1,
+      scrub: 0.3,
       end: function () { return '+=' + getScrollDistance(); },
       invalidateOnRefresh: true,
       onEnter: function () {
@@ -57,14 +57,14 @@
       scrub: true,
       onUpdate: function (self) {
         var p = self.progress;
-        /* Panel glows from dark → warm white */
-        var bgAlpha = (p * 0.07).toFixed(4);
-        var shadowAlpha1 = (p * 0.1).toFixed(4);
-        var shadowAlpha2 = (p * 0.04).toFixed(4);
-        viewerPanel.style.background = 'rgba(240, 235, 225, ' + bgAlpha + ')';
+        /* Panel glows from dark → bright white */
+        var bgAlpha = (p * 0.18).toFixed(4);
+        var shadowAlpha1 = (p * 0.25).toFixed(4);
+        var shadowAlpha2 = (p * 0.1).toFixed(4);
+        viewerPanel.style.background = 'rgba(255, 255, 255, ' + bgAlpha + ')';
         viewerPanel.style.boxShadow =
-          '0 0 80px rgba(240, 235, 225, ' + shadowAlpha1 + '), ' +
-          '0 0 200px rgba(240, 235, 225, ' + shadowAlpha2 + ')';
+          '0 0 80px rgba(255, 255, 255, ' + shadowAlpha1 + '), ' +
+          '0 0 200px rgba(255, 255, 255, ' + shadowAlpha2 + ')';
       },
     });
 
@@ -94,12 +94,15 @@
   }
 
 
-  /* --- Per-frame: negative → color + update caption --- */
+  /* --- Per-frame: negative ↔ color (bidirectional) + update caption --- */
   frames.forEach(function (frame, i) {
     var img = frame.querySelector('img');
     var caption = frame.getAttribute('data-caption') || '';
 
-    /* Color transition tied to scroll position */
+    /* Color transition: negative → clear when entering bright zone,
+       clear → negative when leaving left side.
+       toggleActions: onEnter onLeave onEnterBack onLeaveBack
+       "play reverse play reverse" makes it fully bidirectional */
     gsap.fromTo(img,
       { filter: NEGATIVE },
       {
@@ -107,9 +110,25 @@
         scrollTrigger: {
           trigger: frame,
           containerAnimation: scrollTween,
-          start: 'left 75%',
-          end: 'left 35%',
-          scrub: true,
+          start: 'left 80%',
+          end: 'left 45%',
+          scrub: 0.3,
+          toggleActions: 'play reverse play reverse',
+        },
+      }
+    );
+
+    /* Darken again when frame passes center and exits left */
+    gsap.fromTo(img,
+      { filter: CLEAR },
+      {
+        filter: NEGATIVE,
+        scrollTrigger: {
+          trigger: frame,
+          containerAnimation: scrollTween,
+          start: 'right 30%',
+          end: 'right 5%',
+          scrub: 0.3,
         },
       }
     );
@@ -141,39 +160,7 @@
   });
 
 
-  /* --- Change 3c: Occasional random film burns --- */
-  var burns = gsap.utils.toArray('.film-burn');
-
-  function triggerRandomBurn() {
-    var burn = burns[Math.floor(Math.random() * burns.length)];
-    var xShift = (Math.random() - 0.5) * 30;
-
-    gsap.timeline()
-      .to(burn, {
-        opacity: 1,
-        x: xShift + '%',
-        duration: 2.5,
-        ease: 'power1.in',
-      })
-      .to(burn, {
-        opacity: 0,
-        duration: 3,
-        ease: 'power1.out',
-      })
-      .then(function () {
-        /* Schedule next burn: random 6-15 second interval */
-        var delay = 6000 + Math.random() * 9000;
-        setTimeout(triggerRandomBurn, delay);
-      });
-  }
-
-  /* Start after a 4-second initial delay */
-  if (burns.length > 0) {
-    setTimeout(triggerRandomBurn, 4000);
-  }
-
-
-  /* --- Change 4: Lightbox --- */
+  /* --- Lightbox --- */
   var lightbox = document.getElementById('lightbox');
   if (!lightbox) return;
 
