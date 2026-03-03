@@ -21,6 +21,8 @@ A static photography portfolio hosted on GitHub Pages. Uses GSAP for animations,
 └── Category 2 - General photos/  Photos for "My other work"
     ├── AIV05934.avif
     └── ... (6+ photos)
+└── Category 3 - Youtube Video Projects
+    └── ...
 ```
 
 ---
