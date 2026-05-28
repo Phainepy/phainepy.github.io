@@ -1,4 +1,6 @@
-/* Video page — GSAP scroll-driven zoom-out from fullscreen to CRT monitor */
+/* Video page — GSAP scroll-driven zoom-in: CRT monitor → fullscreen VidEeoh
+   The VidEeoh page is scaled to fit inside the CRT screen and clipped to its shape.
+   As the CRT zooms in, the VidEeoh grows with it until it fills the viewport. */
 (function () {
   gsap.registerPlugin(ScrollTrigger);
 
@@ -7,88 +9,126 @@
   var bezel = document.querySelector('.video-crt-bezel');
   var base = document.querySelector('.video-crt-base');
   var screen = document.querySelector('.video-screen');
+  var scanlines = document.querySelector('.video-scanlines');
   var scrollCue = document.querySelector('.hacker-scroll-cue');
   var cursor = document.querySelector('.hacker-cursor');
+  var screenContent = document.querySelector('.video-screen-content');
+  var videoContent = document.querySelector('.video-content');
+  var ytPage = document.querySelector('.yt-page');
 
   if (!wrapper || !crtFrame) return;
 
-  /* Calculate the scale needed so the screen fills the viewport at start.
-     The "natural" CRT screen size will be about 500×375 (4:3 aspect).
-     We need to scale up so it covers 100vw × 100vh. */
-  var TARGET_SCREEN_W = 500;
-  var TARGET_SCREEN_H = 375;
-
-  function getInitialScale() {
+  function getZoomInScale() {
     var vw = window.innerWidth;
     var vh = window.innerHeight;
-    /* Scale to cover viewport fully (use max of w/h ratios + slight overflow) */
-    return Math.max(vw / TARGET_SCREEN_W, vh / TARGET_SCREEN_H) * 1.08;
+    var sw = screen.offsetWidth;
+    var sh = screen.offsetHeight;
+    return Math.max(vw / sw, vh / sh) * 1.3;
   }
 
-  /* Set initial state: screen fills viewport, bezel hidden */
-  var startScale = getInitialScale();
-  gsap.set(crtFrame, { scale: startScale });
-  gsap.set(screen, { width: TARGET_SCREEN_W + 'px', height: TARGET_SCREEN_H + 'px' });
+  gsap.set(crtFrame, { scale: 1 });
 
-  /* Scroll-driven zoom out */
   ScrollTrigger.create({
     trigger: wrapper,
     start: 'top top',
     end: 'bottom bottom',
-    scrub: 0.8,
+    scrub: 0.5,
     onUpdate: function (self) {
-      var p = self.progress; /* 0 → 1 as user scrolls through the 300vh section */
+      var p = self.progress;
+      var vw = window.innerWidth;
+      var vh = window.innerHeight;
 
-      /* Zoom out: startScale → 1 */
-      var currentScale = startScale + (1 - startScale) * p;
-      crtFrame.style.transform = 'scale(' + currentScale + ')';
-
-      /* At ~30% scroll, start showing bezel and framing the screen */
-      var bezelP = Math.max(0, Math.min((p - 0.2) / 0.2, 1));
-      if (bezelP > 0) {
-        bezel.classList.add('bezel-visible');
-        base.classList.add('bezel-visible');
-        screen.classList.add('screen-framed');
-      } else {
-        bezel.classList.remove('bezel-visible');
-        base.classList.remove('bezel-visible');
-        screen.classList.remove('screen-framed');
-      }
-
-      /* Fade out scroll cue text as user starts scrolling */
+      /* --- Phase 1 (0–15%): Fade "scroll down" --- */
       var cueFade = 1 - Math.min(p / 0.15, 1);
       if (scrollCue) scrollCue.style.opacity = cueFade;
       if (cursor) cursor.style.opacity = cueFade;
 
-      /* Barrel distortion: subtle border-radius warp as it zooms out */
-      var warpAmount = bezelP * 6; /* max 6px of extra curve on sides */
-      screen.style.borderRadius = bezelP > 0
-        ? (10 + warpAmount) + 'px / ' + (10 + warpAmount * 1.5) + 'px'
-        : '0';
+      /* --- Phase 2 (15–85%): CRT zooms in --- */
+      var zoomP = Math.max(0, Math.min((p - 0.15) / 0.7, 1));
+      var easedZoom = zoomP * zoomP * (3 - 2 * zoomP);
+      var endScale = getZoomInScale();
+      var currentScale = 1 + (endScale - 1) * easedZoom;
+      crtFrame.style.transform = 'scale(' + currentScale + ')';
+
+      /* --- Phase 3 (20–45%): VidEeoh appears inside CRT screen --- */
+      var contentFade = Math.max(0, Math.min((p - 0.2) / 0.25, 1));
+
+      if (screenContent) screenContent.style.opacity = 1 - contentFade;
+      if (ytPage) ytPage.style.opacity = contentFade;
+
+      /* Make CRT screen semi-transparent so VidEeoh shows through */
+      if (screen) {
+        screen.style.background = 'rgba(10, 10, 10, ' + (1 - contentFade) + ')';
+      }
+      if (scanlines) scanlines.style.opacity = 1 - contentFade;
+
+      /* --- Scale + clip VidEeoh to fit inside CRT screen --- */
+      if (videoContent && ytPage && contentFade > 0) {
+        var screenRect = screen.getBoundingClientRect();
+
+        if (p < 0.88) {
+          /* Scale yt-page to fit inside the CRT screen */
+          var scaleX = screenRect.width / vw;
+          var scaleY = screenRect.height / vh;
+          var scale = Math.min(Math.max(scaleX, scaleY), 1);
+
+          /* Center the scaled content within the screen area */
+          var contentW = vw * scale;
+          var contentH = vh * scale;
+          var offsetX = screenRect.left + (screenRect.width - contentW) / 2;
+          var offsetY = screenRect.top + (screenRect.height - contentH) / 2;
+
+          ytPage.style.transformOrigin = 'top left';
+          ytPage.style.transform = 'translate(' + offsetX + 'px,' + offsetY + 'px) scale(' + scale + ')';
+
+          /* Clip to CRT screen shape */
+          var insetTop = Math.max(0, screenRect.top);
+          var insetRight = Math.max(0, vw - screenRect.right);
+          var insetBottom = Math.max(0, vh - screenRect.bottom);
+          var insetLeft = Math.max(0, screenRect.left);
+          var radiusP = 1 - Math.max(0, Math.min((p - 0.4) / 0.4, 1));
+          var radius = 10 * radiusP * currentScale;
+
+          videoContent.style.clipPath = 'inset(' +
+            insetTop + 'px ' + insetRight + 'px ' +
+            insetBottom + 'px ' + insetLeft + 'px round ' + radius + 'px)';
+
+          videoContent.style.overflowY = 'hidden';
+          videoContent.style.pointerEvents = 'none';
+        } else {
+          /* Smooth transition to full viewport (88–100%) */
+          var transP = Math.max(0, Math.min((p - 0.88) / 0.12, 1));
+          var easeT = transP * transP * (3 - 2 * transP);
+
+          var scaleNow = Math.min(Math.max(screenRect.width / vw, screenRect.height / vh), 1);
+          var finalScale = scaleNow + (1 - scaleNow) * easeT;
+
+          var contentW = vw * scaleNow;
+          var contentH = vh * scaleNow;
+          var rawX = screenRect.left + (screenRect.width - contentW) / 2;
+          var rawY = screenRect.top + (screenRect.height - contentH) / 2;
+          var finalX = rawX * (1 - easeT);
+          var finalY = rawY * (1 - easeT);
+
+          ytPage.style.transformOrigin = 'top left';
+          ytPage.style.transform = 'translate(' + finalX + 'px,' + finalY + 'px) scale(' + finalScale + ')';
+          videoContent.style.clipPath = 'inset(0)';
+          videoContent.style.overflowY = 'auto';
+          videoContent.style.pointerEvents = 'auto';
+        }
+      }
+
+      /* --- Phase 4 (40–70%): Bezel + base fade --- */
+      var bezelFade = 1 - Math.max(0, Math.min((p - 0.4) / 0.3, 1));
+      if (bezel) bezel.style.opacity = bezelFade;
+      if (base) base.style.opacity = bezelFade;
     },
   });
 
-  /* Reveal VidEeoh page after scrolling past the zoom section */
-  ScrollTrigger.create({
-    trigger: '.video-content',
-    start: 'top 80%',
-    once: true,
-    onEnter: function () {
-      gsap.to('.yt-page', {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        ease: 'power2.out',
-      });
-    },
-  });
-
-  /* Handle resize */
   var resizeTimeout;
   window.addEventListener('resize', function () {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(function () {
-      startScale = getInitialScale();
       ScrollTrigger.refresh();
     }, 200);
   });
