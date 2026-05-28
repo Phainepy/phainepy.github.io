@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Source photos (originals — site uses .avif versions)
+*.jpeg
+*.jpg
+*.PNG
+
+# Claude Code
+.claude/
+
+# Thumbnail source files
+Category 3 - Youtube Video Projects/*.png
