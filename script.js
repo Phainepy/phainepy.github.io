@@ -22,6 +22,14 @@
   var heroContent = document.querySelector('.hero-content');
   var scrollCue = document.querySelector('.scroll-cue');
 
+  /* Make "Scroll down" clickable — smooth scroll to content */
+  if (scrollCue) {
+    scrollCue.addEventListener('click', function () {
+      var target = document.querySelector('.landing-main');
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
   ScrollTrigger.create({
     trigger: '.hero',
     start: 'top top',
