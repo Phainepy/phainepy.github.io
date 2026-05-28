@@ -168,7 +168,7 @@ img {
   50% { transform: translateY(6px); }
 }
 
-/* --- Cloud layers --- */
+/* --- Hand-drawn cloud layers --- */
 .clouds {
   position: absolute;
   inset: 0;
@@ -178,45 +178,32 @@ img {
 
 .cloud {
   position: absolute;
-  border-radius: 50%;
-  background: white;
   will-change: transform, opacity;
+  opacity: 0.55;
 }
 
-/* Clouds clustered at the bottom of the hero */
+/* 4 clouds: two shapes, positioned across the bottom of the hero */
 .cloud--1 {
-  width: 600px; height: 180px;
-  bottom: -40px; left: -80px;
-  background: rgba(255, 255, 255, 0.9);
-  filter: blur(40px);
+  width: 500px;
+  bottom: -30px;
+  left: -60px;
 }
 .cloud--2 {
-  width: 500px; height: 160px;
-  bottom: -30px; right: -60px;
-  background: rgba(255, 255, 255, 0.85);
-  filter: blur(35px);
+  width: 420px;
+  bottom: -10px;
+  right: -40px;
 }
 .cloud--3 {
-  width: 700px; height: 200px;
-  bottom: -50px; left: 15%;
-  background: rgba(255, 255, 255, 0.88);
-  filter: blur(45px);
+  width: 550px;
+  bottom: -50px;
+  left: 25%;
 }
 .cloud--4 {
-  width: 400px; height: 140px;
-  bottom: 20px; right: 10%;
-  background: rgba(248, 244, 252, 0.7);
-  filter: blur(30px);
+  width: 380px;
+  bottom: 10px;
+  right: 15%;
+  opacity: 0.4;
 }
-.cloud--5 {
-  width: 550px; height: 180px;
-  bottom: -20px; left: 35%;
-  background: rgba(255, 255, 255, 0.82);
-  filter: blur(40px);
-}
-/* clouds 6 & 7 hidden — fewer = faster */
-.cloud--6,
-.cloud--7 { display: none; }
 
 
 /* --- Main content area (below clouds) --- */
@@ -817,31 +804,22 @@ img {
     margin-top: -117px;
   }
 
-  /* Scale down clouds for mobile — prevent whiteout */
+  /* Scale down hand-drawn clouds for mobile */
   .cloud--1 {
-    width: 280px; height: 100px;
-    bottom: -20px; left: -40px;
-    filter: blur(25px);
+    width: 220px;
+    bottom: -15px; left: -30px;
   }
   .cloud--2 {
-    width: 250px; height: 90px;
-    bottom: -15px; right: -30px;
-    filter: blur(22px);
+    width: 200px;
+    bottom: -5px; right: -20px;
   }
   .cloud--3 {
-    width: 320px; height: 110px;
-    bottom: -30px; left: 10%;
-    filter: blur(28px);
+    width: 240px;
+    bottom: -20px; left: 10%;
   }
   .cloud--4 {
-    width: 200px; height: 80px;
-    bottom: 10px; right: 5%;
-    filter: blur(20px);
-  }
-  .cloud--5 {
-    width: 260px; height: 95px;
-    bottom: -10px; left: 30%;
-    filter: blur(25px);
+    width: 180px;
+    bottom: 5px; right: 5%;
   }
 
   .video-section {

@@ -38,15 +38,13 @@
     onUpdate: function (self) {
       var p = self.progress;
 
-      /* Move clouds apart */
+      /* Drift clouds to the sides and fade out */
       clouds.forEach(function (cloud, i) {
         var direction = i % 2 === 0 ? -1 : 1;
-        var speed = 60 + i * 30;
-        var moveY = -(80 + i * 25) * p;
-        var moveX = direction * speed * p;
+        var driftX = direction * (120 + i * 60) * p;
         var fade = 1 - p;
-        cloud.style.transform = 'translate(' + moveX + 'px, ' + moveY + 'px) scale(' + (1 + p * 0.2) + ')';
-        cloud.style.opacity = fade;
+        cloud.style.transform = 'translateX(' + driftX + 'px)';
+        cloud.style.opacity = fade * 0.55;
       });
 
       /* Fade hero text */
