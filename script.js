@@ -493,4 +493,32 @@
       });
     }
   }
+
+  /* ===========================================
+     BUCKET 3: SS Cowriting — notebook click
+     =========================================== */
+  var cowritingBucket = document.getElementById('bucket-cowriting');
+  if (cowritingBucket) {
+    cowritingBucket.addEventListener('click', function (e) {
+      e.preventDefault();
+      var href = cowritingBucket.getAttribute('href');
+
+      /* Notebook opens and scales up */
+      gsap.to('.notebook', {
+        scale: 3,
+        opacity: 0,
+        duration: 0.7,
+        ease: 'power3.in',
+      });
+      gsap.to('.landing-header, .bucket:not(#bucket-cowriting), .landing-footer, .goodbye-section, .bucket-title, .badge', {
+        opacity: 0,
+        duration: 0.4,
+        ease: 'power2.in',
+      });
+
+      setTimeout(function () {
+        window.location.href = href;
+      }, 650);
+    });
+  }
 })();

@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20" />
+  <link rel="stylesheet" href="styles.css?v=24" />
 </head>
 <body class="landing-page">
 
@@ -95,8 +95,36 @@
       </a>
     </section>
 
-    <!-- Bucket 3: Video projects — CRT monitor -->
+    <!-- Buckets 3 & 4: Cowriting + Video projects -->
     <section class="video-section">
+      <!-- Bucket 3: SS Cowriting — notebook -->
+      <a href="cowriting.html" class="bucket bucket-cowriting" id="bucket-cowriting">
+        <div class="notebook">
+          <div class="notebook-spine"></div>
+          <div class="notebook-pages">
+            <div class="page-lines"></div>
+            <svg class="notebook-writing" viewBox="0 0 140 160" aria-hidden="true">
+              <path d="M10,20 C30,16 50,24 70,20 C90,16 110,24 130,20" />
+              <path d="M10,44 C25,40 45,48 65,44 C85,40 105,48 120,44" />
+              <path d="M10,68 C30,64 50,72 70,68 C90,64 100,72 115,68" />
+              <path d="M10,92 C20,88 40,96 60,92 C80,88 100,96 125,92" />
+              <path d="M10,116 C30,112 50,120 70,116 C90,112 105,118 110,116" />
+            </svg>
+            <svg class="notebook-pen" viewBox="0 0 24 140" aria-hidden="true">
+              <rect x="8" y="0" width="8" height="100" rx="2" fill="#2a2a2a" />
+              <rect x="6" y="90" width="12" height="14" rx="1" fill="#c4a86a" />
+              <polygon points="6,104 18,104 12,140" fill="#c4a86a" />
+              <rect x="9" y="5" width="6" height="12" rx="1" fill="#4a4a4a" opacity="0.5" />
+            </svg>
+          </div>
+          <div class="notebook-cover">
+            <div class="notebook-strap"></div>
+          </div>
+        </div>
+        <h2 class="bucket-title">SS Cowriting</h2>
+      </a>
+
+      <!-- Bucket 4: Video projects — CRT monitor -->
       <a href="video.html" class="bucket bucket-video" id="bucket-video">
         <div class="crt-monitor">
           <div class="crt-body">
@@ -156,7 +184,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/ScrollTrigger.min.js"></script>
-  <script src="script.js?v=14"></script>
+  <script src="script.js?v=15"></script>
   <script>
     document.addEventListener('contextmenu', function (e) {
       if (e.target.tagName === 'IMG') e.preventDefault();

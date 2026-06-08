@@ -492,11 +492,168 @@ img {
 
 /* --- Video section (CRT monitor) --- */
 .video-section {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 60px;
   width: 100%;
   max-width: 800px;
   margin-bottom: 40px;
+}
+
+/* --- Bucket 3: SS Cowriting — Notebook --- */
+
+.bucket-cowriting {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.notebook {
+  width: 200px;
+  height: 260px;
+  position: relative;
+  perspective: 800px;
+  margin: 0 auto;
+}
+
+.notebook-spine {
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 14px;
+  background: linear-gradient(90deg, #5a3a28 0%, #7a5240 40%, #6b4535 100%);
+  border-radius: 3px 0 0 3px;
+  z-index: 3;
+  box-shadow: 2px 0 6px rgba(0,0,0,0.2);
+}
+
+.notebook-cover {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #8B6342 0%, #6B4226 40%, #5A3520 70%, #4A2818 100%);
+  border-radius: 2px 6px 6px 2px;
+  z-index: 2;
+  transform-origin: left center;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow:
+    0 4px 16px rgba(0,0,0,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.1),
+    inset 0 -2px 4px rgba(0,0,0,0.15);
+}
+
+/* Inside of cover (lighter endpaper) */
+.notebook-cover::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  background: linear-gradient(145deg, #d4c8b8 0%, #c4b8a4 100%);
+  border-radius: 2px;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+}
+
+.notebook-strap {
+  position: absolute;
+  right: 18px;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  background: #3a2a1a;
+  border-radius: 1px;
+  opacity: 0.5;
+}
+
+.notebook-pages {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  bottom: 6px;
+  left: 14px;
+  background: #faf6f0;
+  border-radius: 0 4px 4px 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.page-lines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 23px,
+    rgba(150, 180, 210, 0.3) 23px,
+    rgba(150, 180, 210, 0.3) 24px
+  );
+  border-left: 1px solid rgba(220, 100, 100, 0.25);
+  margin-left: 24px;
+  margin-top: 16px;
+}
+
+.notebook-pen {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  width: 14px;
+  height: 80px;
+  transform: rotate(30deg) translateY(10px);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.3s;
+  z-index: 2;
+  opacity: 0.7;
+  transition-property: transform, opacity;
+}
+
+.notebook-writing {
+  position: absolute;
+  top: 22px;
+  left: 28px;
+  width: 140px;
+  height: 160px;
+  z-index: 1;
+}
+
+.notebook-writing path {
+  fill: none;
+  stroke: #2a2a4a;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-dasharray: 250;
+  stroke-dashoffset: 250;
+}
+
+.notebook-writing path:nth-child(1) { transition: stroke-dashoffset 1.2s ease 0.5s; }
+.notebook-writing path:nth-child(2) { transition: stroke-dashoffset 1.2s ease 0.7s; }
+.notebook-writing path:nth-child(3) { transition: stroke-dashoffset 1.2s ease 0.9s; }
+.notebook-writing path:nth-child(4) { transition: stroke-dashoffset 1.2s ease 1.1s; }
+.notebook-writing path:nth-child(5) { transition: stroke-dashoffset 1.2s ease 1.3s; }
+
+/* Hover: cover opens, pen lifts, writing appears */
+.bucket-cowriting:hover .notebook-cover {
+  transform: rotateY(-160deg);
+}
+
+.bucket-cowriting:hover .notebook-pen {
+  transform: rotate(15deg) translateY(-20px);
+  opacity: 1;
+}
+
+.bucket-cowriting:hover .notebook-writing path {
+  stroke-dashoffset: 0;
+}
+
+/* Mobile: show open state (no hover available) */
+@media (hover: none) {
+  .notebook-cover {
+    transform: rotateY(-160deg);
+  }
+  .notebook-pen {
+    transform: rotate(15deg) translateY(-20px);
+    opacity: 1;
+  }
+  .notebook-writing path {
+    stroke-dashoffset: 0;
+  }
 }
 
 .bucket-video {
@@ -775,6 +932,13 @@ img {
   .crt-monitor {
     width: 200px;
   }
+  .notebook {
+    width: 180px;
+    height: 234px;
+  }
+  .video-section {
+    gap: 40px;
+  }
 }
 
 @media (max-width: 560px) {
@@ -823,7 +987,14 @@ img {
   }
 
   .video-section {
+    grid-template-columns: 1fr;
+    gap: 48px;
     margin-bottom: 32px;
+  }
+
+  .notebook {
+    width: 180px;
+    height: 230px;
   }
 
   .crt-monitor {
@@ -1753,6 +1924,243 @@ img {
 /* ===========================================
    VIDEO PAGE
    =========================================== */
+
+/* ===========================================================
+   COWRITING PAGE — Dark forest with field notes
+   =========================================================== */
+
+.cowriting-page {
+  background: #0a0a0a;
+  min-height: 100vh;
+  color: #e8e4dc;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Full-bleed forest background — brightness bumped +0.05 */
+.forest-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.forest-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(1.05);
+}
+
+/* Nav on dark background */
+.cowriting-nav .back-link,
+.cowriting-nav .work-nav-title {
+  color: #e8e4dc;
+}
+
+.cowriting-nav .back-link:hover {
+  color: #fff;
+}
+
+/* Header blurb overlay */
+.cowriting-header {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 100px 24px 40px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.cowriting-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 6vw, 3.5rem);
+  font-weight: 300;
+  color: #e8e4dc;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+  margin-bottom: 24px;
+}
+
+.cowriting-blurb {
+  font-family: var(--font-body);
+  font-size: 1.3rem;
+  line-height: 1.8;
+  color: rgba(232, 228, 220, 0.85);
+  font-style: italic;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+/* --- Field notes scattered across the forest --- */
+.field-notes {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 60vh;
+  min-height: 400px;
+}
+
+.field-note {
+  position: absolute;
+  width: 110px;
+  cursor: default;
+}
+
+.field-note--unlocked {
+  cursor: pointer;
+}
+
+/* Pushpin / staple */
+.field-note-pin {
+  width: 18px;
+  height: 6px;
+  background: linear-gradient(180deg, #aaa 0%, #888 100%);
+  border-radius: 1px;
+  margin: 0 auto 0;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+/* Paper */
+.field-note-paper {
+  background: linear-gradient(170deg, #f4efe6 0%, #e8e0d0 60%, #ddd5c4 100%);
+  padding: 14px 10px 16px;
+  border-radius: 1px;
+  box-shadow:
+    0 3px 12px rgba(0,0,0,0.4),
+    inset 0 0 0 1px rgba(0,0,0,0.05);
+  transform-origin: top center;
+  transform: rotate(0deg);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle aged paper texture via noise */
+.field-note-paper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 11px,
+    rgba(180, 170, 150, 0.15) 11px,
+    rgba(180, 170, 150, 0.15) 12px
+  );
+  pointer-events: none;
+}
+
+.field-note-label {
+  display: block;
+  font-family: 'Special Elite', 'Courier New', monospace;
+  font-size: 0.65rem;
+  color: #4a4035;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.field-note-title {
+  display: block;
+  font-family: 'Special Elite', 'Courier New', monospace;
+  font-size: 0.6rem;
+  color: #6a5d50;
+  line-height: 1.4;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.4s ease 0.15s, max-height 0.4s ease;
+}
+
+/* Unlocked notes: hover opens them up */
+.field-note--unlocked:hover .field-note-paper {
+  transform: rotate(-3deg) translateY(-4px);
+  box-shadow:
+    0 8px 24px rgba(0,0,0,0.5),
+    inset 0 0 0 1px rgba(0,0,0,0.05);
+}
+
+.field-note--unlocked:hover .field-note-title {
+  opacity: 1;
+  max-height: 60px;
+}
+
+/* Locked notes: slightly faded */
+.field-note--locked .field-note-paper {
+  opacity: 0.7;
+}
+
+.field-note--locked .field-note-title {
+  opacity: 0;
+}
+
+/* Give each note a slight unique rotation */
+.field-note[data-note="1"] .field-note-paper { transform: rotate(-2deg); }
+.field-note[data-note="2"] .field-note-paper { transform: rotate(3deg); }
+.field-note[data-note="3"] .field-note-paper { transform: rotate(-1deg); }
+.field-note[data-note="4"] .field-note-paper { transform: rotate(2deg); }
+.field-note[data-note="5"] .field-note-paper { transform: rotate(-3deg); }
+.field-note[data-note="6"] .field-note-paper { transform: rotate(1deg); }
+.field-note[data-note="7"] .field-note-paper { transform: rotate(-2deg); }
+
+/* Footer */
+.cowriting-footer {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 40px 24px 32px;
+}
+
+.cowriting-status {
+  font-family: var(--font-body);
+  font-size: 1.4rem;
+  color: rgba(232, 228, 220, 0.6);
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+}
+
+.cowriting-back {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: rgba(232, 228, 220, 0.6);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.cowriting-back:hover {
+  color: #fff;
+}
+
+/* Mobile: reflow notes into a column */
+@media (max-width: 768px) {
+  .field-notes {
+    height: auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 20px 24px 40px;
+  }
+
+  .field-note {
+    position: static;
+    width: 160px;
+  }
+
+  /* Show titles on mobile (no hover) */
+  .field-note--unlocked .field-note-title {
+    opacity: 1;
+    max-height: 60px;
+  }
+}
+
+/* ===========================================================
+   VIDEO PAGE
+   =========================================================== */
 
 .video-page {
   background: #000;
