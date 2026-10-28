@@ -70,7 +70,7 @@
       '  vec2 fc = gl_FragCoord.xy;',
       '',
       '  // ---- backlight energy: sum of trail points + live cursor core ----',
-      '  float sigma = uCell * 7.0;',
+      '  float sigma = uCell * 5.5;',
       '  float k = 1.0 / (2.0 * sigma * sigma);',
       '  float energy = 0.0;',
       '  for (int i = 0; i < 40; i++) {',
@@ -78,7 +78,7 @@
       '    vec3 p = uPts[i];',
       '    energy += p.z * exp(-d2(fc - p.xy) * k);',
       '  }',
-      '  float cs = uCell * 4.0;',
+      '  float cs = uCell * 3.0;',
       '  energy += uMouseE * 1.35 * exp(-d2(fc - uMouse) / (2.0 * cs * cs));',
       '  energy = clamp(energy, 0.0, 1.7);',
       '',
@@ -181,7 +181,7 @@
     function frame() {
       // decay trail + mouse energy
       for (var i = pts.length - 1; i >= 0; i--) {
-        pts[i].life *= 0.93;
+        pts[i].life *= 0.955;
         if (pts[i].life < 0.02) pts.splice(i, 1);
       }
       mouseE *= 0.92;
