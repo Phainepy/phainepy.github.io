@@ -388,7 +388,41 @@
   var videoBucket = document.getElementById('bucket-video');
   if (videoBucket) {
     var crtScreen = videoBucket.querySelector('.crt-screen');
+    var crtThumbWrap = videoBucket.querySelector('.crt-thumbnails');
     var thumbs = videoBucket.querySelectorAll('.crt-thumb');
+
+    function refreshThumbs() { thumbs = videoBucket.querySelectorAll('.crt-thumb'); }
+
+    /* Auto-sync the monitor's thumbnails from video.html, newest first, so
+       new uploads show up here without touching this page. The thumbnails
+       hardcoded in index.html act as a fallback if the fetch fails. */
+    (function syncCrtThumbs() {
+      if (!crtThumbWrap || !window.fetch || !window.DOMParser) return;
+      fetch('video.html', { cache: 'no-cache' })
+        .then(function (r) { return r.ok ? r.text() : Promise.reject(); })
+        .then(function (html) {
+          var doc = new DOMParser().parseFromString(html, 'text/html');
+          var imgs = doc.querySelectorAll('.yt-video-card .yt-thumb-wrap img');
+          var srcs = [];
+          imgs.forEach(function (im) {
+            var s = im.getAttribute('src');
+            if (s) srcs.push(s);
+          });
+          if (!srcs.length) return;
+          crtThumbWrap.innerHTML = '';
+          srcs.forEach(function (s) {
+            var img = document.createElement('img');
+            img.className = 'crt-thumb';
+            img.alt = '';
+            img.loading = 'lazy';
+            img.setAttribute('src', s);
+            crtThumbWrap.appendChild(img);
+          });
+          refreshThumbs();
+        })
+        .catch(function () { /* keep the fallback thumbnails from the markup */ });
+    })();
+
     var crtHoverTimer = null;
     var crtCycleTimer = null;
     var crtStaticTimer = null;
@@ -435,6 +469,7 @@
 
     videoBucket.addEventListener('mouseenter', function () {
       isCrtAnimating = true;
+      refreshThumbs();
 
       /* Phase 1: Screen powers on — hold the glow/static for 600ms */
       crtHoverTimer = setTimeout(function () {
